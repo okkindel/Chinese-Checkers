@@ -1,0 +1,3 @@
+# Chinese-Checkers
+
+School Project
