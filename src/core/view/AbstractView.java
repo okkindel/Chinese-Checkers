@@ -9,6 +9,7 @@ public abstract class AbstractView extends JPanel {
 
     JFrame frame;
     JPanel mainPanel;
+    JPanel underPanel;
 
     void draw() {
         frame = new JFrame("Chinese Checkers");
@@ -17,6 +18,7 @@ public abstract class AbstractView extends JPanel {
         frame.setIconImage(icon);
 
         mainPanel = new JPanel();
+        underPanel = new JPanel();
     }
 
     public static void showError(String error) {
