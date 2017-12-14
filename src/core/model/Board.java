@@ -36,7 +36,8 @@ public abstract class Board extends Observable implements Serializable {
 
     protected void addPlayer(String playerName, boolean AI)
     {
-        if (AI) { //the new player has to be either an AI or a human
+        //the new player has to be either an AI or a human
+        if (AI) {
             players.add(new AI(playerName));
         }
         else {
@@ -48,11 +49,14 @@ public abstract class Board extends Observable implements Serializable {
     {
         int next = players.indexOf(activePlayer)+1;
 
-        if (next > players.size()-1) { //we're at the end of the list
-            next = 0; //so we go back to the start
+        //we're at the end of the list
+        if (next > players.size()-1) {
+            //so we go back to the start
+            next = 0;
         }
         activePlayer = players.get(next);
-        relayMessage("msg-"+activePlayer.getName()+ "'s turn"); //show that the active player has changed, and the name of the new player
+        //show that the active player has changed, and the name of the new player
+        relayMessage("msg-"+activePlayer.getName()+ "'s turn");
         relayMessage("turnChange");
     }
 
@@ -62,15 +66,15 @@ public abstract class Board extends Observable implements Serializable {
         notifyObservers(message);
     }
 
-    public void runClient(String IP, String port) {
-        serverIp = IP;
-        serverPort = Integer.parseInt(port);
-        Thread t = new Thread(new Board.NetPlayClient());
-        t.start();
-    }
-
-    public void runServer() {
-        Thread t = new Thread(new Board.NetPlayServer());
-        t.start();
-    }
+//    public void runClient(String IP, String port) {
+//        serverIp = IP;
+//        serverPort = Integer.parseInt(port);
+//        Thread t = new Thread(new Board.NetPlayClient());
+//        t.start();
+//    }
+//
+//    public void runServer() {
+//        Thread t = new Thread(new Board.NetPlayServer());
+//        t.start();
+//    }
 }

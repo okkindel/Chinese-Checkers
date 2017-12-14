@@ -42,12 +42,16 @@ public class Assets {
 
         private static Load createAsset(String type) {
             Load asset = null;
-            if (type.equals("image")) {
-                asset = instance.new LoadImage();
-            } else if (type.equals("imageIcon")) {
-                asset = instance.new LoadIcon();
-            } else if (type.equals("textFile")) {
-                asset = instance.new LoadText();
+            switch (type) {
+                case "image":
+                    asset = instance.new LoadImage();
+                    break;
+                case "imageIcon":
+                    asset = instance.new LoadIcon();
+                    break;
+                case "textFile":
+                    asset = instance.new LoadText();
+                    break;
             }
             return asset;
         }

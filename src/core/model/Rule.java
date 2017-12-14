@@ -1,4 +1,7 @@
 package core.model;
 
-public class Rule {
+public interface Rule {
+
+    boolean checkValid(Board board, Command command);
+    String getInvalidMsg();
 }

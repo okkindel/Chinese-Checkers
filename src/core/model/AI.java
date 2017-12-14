@@ -1,5 +1,6 @@
 package core.model;
 
+import checkers.model.CheckersBoard;
 import checkers.model.CheckersTile;
 
 import java.util.ArrayList;
@@ -13,8 +14,13 @@ public class AI extends Player {
     public AI(String name)
     {
         super(name);
-        isAI = true; //this is an AI, so we set it as such
+        //this is an AI, so we set it as such
+        isAI = true;
         finishedTiles = new ArrayList<CheckersTile>();
         rand = new Random();
+    }
+
+    public void checkersMove(CheckersBoard board) {
+
     }
 }

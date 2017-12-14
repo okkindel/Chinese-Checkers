@@ -3,6 +3,8 @@ package checkers.model;
 import core.model.AI;
 import core.model.Board;
 
+import java.util.ArrayList;
+
 public class CheckersBoard extends Board {
 
     private CheckersTile[][] tiles;
@@ -87,13 +89,18 @@ public class CheckersBoard extends Board {
             return;
         }
 
-        if (!System.getProperty("checkers.playerOne.type").equals("2")) { //if it's not two then this player is enabled
-            if (System.getProperty("checkers.playerOne.type").equals("0")) { //zero means human
-                addPlayer(System.getProperty("playerOne.name"), false); //so we create it using the name stored in properties
+        //if it's not two then this player is enabled
+        if (!System.getProperty("checkers.playerOne.type").equals("2")) {
+            //zero means human
+            if (System.getProperty("checkers.playerOne.type").equals("0")) {
+                //so we create it using the name stored in properties
+                addPlayer(System.getProperty("playerOne.name"), false);
             } else {
-                addPlayer(System.getProperty("playerOne.name"), true); //otherwise the player type should only ever be 1, which equates to AI
+                //otherwise the player type should only ever be 1, which equates to AI
+                addPlayer(System.getProperty("playerOne.name"), true);
             }
-            tiles[6][0].setPiece(new CheckersPiece(getPlayers().get(getPlayers().size() - 1))); //after this all that remains is to actually add the pieces to the board
+            //after this all that remains is to actually add the pieces to the board
+            tiles[6][0].setPiece(new CheckersPiece(getPlayers().get(getPlayers().size() - 1)));
             tiles[5][1].setPiece(new CheckersPiece(getPlayers().get(getPlayers().size() - 1)));
             tiles[6][1].setPiece(new CheckersPiece(getPlayers().get(getPlayers().size() - 1)));
             tiles[5][2].setPiece(new CheckersPiece(getPlayers().get(getPlayers().size() - 1)));
@@ -307,12 +314,72 @@ public class CheckersBoard extends Board {
                 }
                 break;
             default:
-                //should never get here, but just in case
                 break;
         }
         gameEnd = have_been_won;
         return have_been_won;
     }
 
+    ArrayList<CheckersTile[]> findMoves(CheckersTile start) {
+
+        ArrayList<CheckersTile[]> foundMoves = new ArrayList<>();
+
+        int xPos = start.getX();
+        int yPos = start.getY();
+
+        for (int xOffset = -1; xOffset < 2; xOffset++) {
+            for (int yOffset = -1; yOffset < 2; yOffset++) {
+
+                //later on in this method we have to modify x slightly, so it is reset to it's original value here
+                xPos = start.getX();
+                //this is to make sure that the tile we're jumping into is within bounds of the array of tiles
+                boolean outOfBounds = (xPos + xOffset < 0 || yPos + yOffset < 0 || xPos + xOffset > 12 || yPos + yOffset > 16);
+
+//               The following might look a little complex at first glance, but it is necessary.
+//				 Since the movement of a piece in chinese checkers is not in a square grid, but in a hex shape, we need to shave the corners off.
+//				 However, since the board is comprised by shifting the rows to make it shaped correctly, this means that the corners that we need to
+//				 shave off are different depending on whether the row is a 'shifted' one or not.
+
+                //this checks if we are in a 'shifted' row
+                boolean onModRow = (!(yPos % 2 == 0));
+                //if we are in a shifted row, the top left and bottom left cells should not be accessible
+                boolean modShift = (yPos + yOffset != yPos && (xPos + xOffset) == xPos - 1);
+                //and if we aren't, the top right and bottom right cells should not be accessible
+                boolean nonModShift = (yPos + yOffset != yPos && (xPos + xOffset) == xPos + 1);
+
+                if (outOfBounds || (onModRow && modShift) || (!onModRow && nonModShift)) {
+                    //if any of those are true, we should ignore that cell, since no matter what, a piece cannot move there in one move
+                    continue;
+                }
+
+                //if this passes it means that we've found an adjacent empty tile for the piece to move to, so we should add it to the list of pieces to return
+                if (getTiles()[xPos + xOffset][yPos + yOffset].getPiece() == null && getTiles()[xPos + xOffset][yPos + yOffset].getAccessible()) {
+                    CheckersTile[] move = {start, getTiles()[xPos + xOffset][yPos + yOffset]};
+                    foundMoves.add(move);
+                } else if (!(xPos + xOffset * 2 < 0 || yPos + yOffset * 2 < 0 || xPos + xOffset * 2 > 12 || yPos + yOffset * 2 > 16)) {
+                    //if we get this far then there should be pieces we can jump over, and still be in bounds of the board
+                    //first we need to modify the xPos accordingly to reflect jumping over pieces and the change that this has on the shifted tiles mentioned before
+                    if (onModRow && !((yPos + yOffset * 2) == yPos)) {
+                        xPos -= 1;
+                    }
+                    //destination is on same row so do nothing
+                    else if (yOffset == 0) {
+                    } else {
+                        xPos += 1;
+                    }
+
+                    //this is to check that the space over the adjacent piece is free to jump into
+                    boolean emptyDestination = (getTiles()[xPos + (xOffset * 2)][yPos + (yOffset * 2)].getPiece() == null);
+                    //this checks that the space we're jumping into is an accessible cell
+                    boolean accessible = (getTiles()[xPos + (xOffset * 2)][yPos + (yOffset * 2)].getAccessible());
+                    if (emptyDestination && accessible) {
+                        //we found a valid move, so we add it to the list
+                        foundMoves.add(new CheckersTile[]{start, getTiles()[xPos + (xOffset * 2)][yPos + (yOffset * 2)]});
+                    }
+                }
+            }
+        }
+        return foundMoves;
+    }
 
 }
