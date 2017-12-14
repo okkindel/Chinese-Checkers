@@ -1,7 +1,7 @@
 package core.model;
 
-/**
- * Created by Maciej Hajduk on 13.12.2017.
- */
-public class Rule {
+public interface Rule {
+
+    boolean checkValid(Board board, Command command);
+    String getInvalidMsg();
 }

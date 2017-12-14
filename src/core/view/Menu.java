@@ -1,5 +1,6 @@
 package core.view;
 
+import checkers.view.CheckersGameView;
 import core.model.Assets;
 import javax.swing.*;
 import java.awt.*;
@@ -15,12 +16,12 @@ public class Menu extends AbstractView {
     private JButton startButton, exitButton;
     private JButton newGameButton, netPlayButton, optionsButton;
     private JButton backButton, saveOptions;
-    private JComboBox playerOneTypeComboBox;
-    private JComboBox playerTwoTypeComboBox;
-    private JComboBox playerThreeTypeComboBox;
-    private JComboBox playerFourTypeComboBox;
-    private JComboBox playerFiveTypeComboBox;
-    private JComboBox playerSixTypeComboBox;
+    private JComboBox<String> playerOneTypeComboBox;
+    private JComboBox<String> playerTwoTypeComboBox;
+    private JComboBox<String> playerThreeTypeComboBox;
+    private JComboBox<String> playerFourTypeComboBox;
+    private JComboBox<String> playerFiveTypeComboBox;
+    private JComboBox<String> playerSixTypeComboBox;
 
     public Menu() {
         startButton = new JButton("Start Game");
@@ -79,7 +80,7 @@ public class Menu extends AbstractView {
 
     private void newGame() {
         frame.setVisible(false);
-        //new CheckersGameView();
+        new CheckersGameView();
     }
 
     private void drawOptionMenu() {
@@ -95,37 +96,37 @@ public class Menu extends AbstractView {
         JLabel playerOneOptionsLabel = new JLabel("Player One");
         playerOneOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerOneOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
-        playerOneTypeComboBox = new JComboBox(playerOptions);
+        playerOneTypeComboBox = new JComboBox<>(playerOptions);
         playerOneTypeComboBox.setSelectedIndex(0);
 
         JLabel playerTwoOptionsLabel = new JLabel("Player Two");
         playerTwoOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerTwoOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
-        playerTwoTypeComboBox = new JComboBox(playerOptions);
+        playerTwoTypeComboBox = new JComboBox<>(playerOptions);
         playerTwoTypeComboBox.setSelectedIndex(1);
 
         JLabel playerThreeOptionsLabel = new JLabel("Player Three");
         playerThreeOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerThreeOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
-        playerThreeTypeComboBox = new JComboBox(playerOptions);
+        playerThreeTypeComboBox = new JComboBox<>(playerOptions);
         playerThreeTypeComboBox.setSelectedIndex(0);
 
         JLabel playerFourOptionsLabel = new JLabel("Player Four");
         playerThreeOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerThreeOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
-        playerFourTypeComboBox = new JComboBox(playerOptions);
+        playerFourTypeComboBox = new JComboBox<>(playerOptions);
         playerFourTypeComboBox.setSelectedIndex(0);
 
         JLabel playerFiveOptionsLabel = new JLabel("Player Five");
         playerFiveOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerFiveOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
-        playerFiveTypeComboBox = new JComboBox(playerOptions);
+        playerFiveTypeComboBox = new JComboBox<>(playerOptions);
         playerFiveTypeComboBox.setSelectedIndex(0);
 
         JLabel playerSixOptionsLabel = new JLabel("Player Six");
         playerSixOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerSixOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
-        playerSixTypeComboBox = new JComboBox(playerOptions);
+        playerSixTypeComboBox = new JComboBox<>(playerOptions);
         playerSixTypeComboBox.setSelectedIndex(0);
 
         mainPanel.setLayout(new GridLayout(7, 2, 15, 20));
@@ -153,6 +154,7 @@ public class Menu extends AbstractView {
 //        playerFiveTypeComboBox.setSelectedIndex(Integer.parseInt(System.getProperty("checkers.playerFive.type")));
 //        playerSixTypeComboBox.setSelectedIndex(Integer.parseInt(System.getProperty("checkers.playerSix.type")));
 
+        frame.setSize(new Dimension(500,300));
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
         frame.add(options, BorderLayout.NORTH);
@@ -177,7 +179,7 @@ public class Menu extends AbstractView {
     private class NewGamePressed implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) { //the new game button has been pressed
-            newGame(); //so we start a new game
+            newGame();
         }
     }
 

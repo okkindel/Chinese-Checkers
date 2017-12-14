@@ -1,7 +1,22 @@
 package core.model;
+import java.io.Serializable;
 
-/**
- * Created by Maciej Hajduk on 13.12.2017.
- */
-public class Player {
+public class Player implements Serializable {
+
+    protected String name;
+    protected boolean isAI;
+
+    protected Player(String name)
+    {
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+    public boolean isAI()
+    {
+        return false;
+    }
 }
