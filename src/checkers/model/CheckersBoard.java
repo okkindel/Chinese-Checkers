@@ -217,8 +217,8 @@ public class CheckersBoard extends Board {
                     CheckersTile[] goalTiles = {tiles[5][15], tiles[6][15], tiles[5][14], tiles[6][14], tiles[7][14],
                             tiles[4][13], tiles[5][13], tiles[6][13], tiles[7][13]};
                     have_been_won = true;
-                    for (int i = 0; i < goalTiles.length; i++) {
-                        if (goalTiles[i].getPiece() == null || goalTiles[i].getPiece().getOwner() != players.get(0)) {
+                    for (CheckersTile goalTile : goalTiles) {
+                        if (goalTile.getPiece() == null || goalTile.getPiece().getOwner() != players.get(0)) {
                             have_been_won = false;
                             //break out since all the pieces in the goal tiles must be owned by the active player, and all must be in
                             // the goal tiles for the active player to have won, so no point checking any others
@@ -233,8 +233,8 @@ public class CheckersBoard extends Board {
                     CheckersTile[] goalTiles = {tiles[5][1], tiles[6][1], tiles[5][2], tiles[6][2], tiles[7][2],
                             tiles[4][3], tiles[5][3], tiles[6][3], tiles[7][3]};
                     have_been_won = true;
-                    for (int i = 0; i < goalTiles.length; i++) {
-                        if (goalTiles[i].getPiece() == null || goalTiles[i].getPiece().getOwner() != players.get(1)) {
+                    for (CheckersTile goalTile : goalTiles) {
+                        if (goalTile.getPiece() == null || goalTile.getPiece().getOwner() != players.get(1)) {
                             have_been_won = false;
                             break;
                         }
@@ -247,8 +247,8 @@ public class CheckersBoard extends Board {
                     CheckersTile[] goalTiles = {tiles[11][12], tiles[11][11], tiles[11][10], tiles[10][12],
                             tiles[10][11], tiles[10][10], tiles[11][9], tiles[9][12], tiles[12][11]};
                     have_been_won = true;
-                    for (int i = 0; i < goalTiles.length; i++) {
-                        if (goalTiles[i].getPiece() == null || goalTiles[i].getPiece().getOwner() != players.get(2)) {
+                    for (CheckersTile goalTile : goalTiles) {
+                        if (goalTile.getPiece() == null || goalTile.getPiece().getOwner() != players.get(2)) {
                             have_been_won = false;
                             break;
                         }
@@ -261,11 +261,11 @@ public class CheckersBoard extends Board {
                     CheckersTile[] goalTiles = {tiles[1][4], tiles[0][5], tiles[2][4], tiles[2][5], tiles[1][6],
                             tiles[3][4], tiles[3][5], tiles[2][6], tiles[2][7]};
                     have_been_won = true;
-                    for (int i = 0; i < goalTiles.length; i++) {
-                        if (goalTiles[i].getPiece() == null) {
+                    for (CheckersTile goalTile : goalTiles) {
+                        if (goalTile.getPiece() == null) {
                             have_been_won = false;
                             break;
-                        } else if (goalTiles[i].getPiece().getOwner() != players.get(3)) {
+                        } else if (goalTile.getPiece().getOwner() != players.get(3)) {
                             have_been_won = false;
                             break;
                         }
@@ -278,11 +278,11 @@ public class CheckersBoard extends Board {
                     CheckersTile[] goalTiles = {tiles[0][12], tiles[1][11], tiles[1][12], tiles[1][10], tiles[2][11],
                             tiles[2][12], tiles[1][9], tiles[2][10], tiles[3][11], tiles[3][12]};
                     have_been_won = true;
-                    for (int i = 0; i < goalTiles.length; i++) {
-                        if (goalTiles[i].getPiece() == null) {
+                    for (CheckersTile goalTile : goalTiles) {
+                        if (goalTile.getPiece() == null) {
                             have_been_won = false;
                             break;
-                        } else if (goalTiles[i].getPiece().getOwner() != players.get(4)) {
+                        } else if (goalTile.getPiece().getOwner() != players.get(4)) {
                             have_been_won = false;
                             break;
                         }
@@ -295,11 +295,11 @@ public class CheckersBoard extends Board {
                     CheckersTile[] goalTiles = {tiles[12][4], tiles[11][4], tiles[11][5], tiles[10][4], tiles[10][5],
                             tiles[11][6], tiles[9][4], tiles[9][5], tiles[10][6], tiles[10][7]};
                     have_been_won = true;
-                    for (int i = 0; i < goalTiles.length; i++) {
-                        if (goalTiles[i].getPiece() == null) {
+                    for (CheckersTile goalTile : goalTiles) {
+                        if (goalTile.getPiece() == null) {
                             have_been_won = false;
                             break;
-                        } else if (goalTiles[i].getPiece().getOwner() != players.get(5)) {
+                        } else if (goalTile.getPiece().getOwner() != players.get(5)) {
                             have_been_won = false;
                             break;
                         }
