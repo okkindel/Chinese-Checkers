@@ -25,6 +25,8 @@ public class Main extends Application {
     public static String PlayersSceneFile = "/core/view/fxml/PlayersScene.fxml";
     public static String NumberOfPlayersSceneID = "numberOfPlayers";
     public static String NumberOfPlayersSceneFile = "/core/view/fxml/NumberOfPlayersScene.fxml";
+    public static String RulesSceneID = "rules";
+    public static String RulesSceneFile = "/core/view/fxml/RulesScene.fxml";
 
 
     public static void main(String[] args) {
@@ -39,7 +41,7 @@ public class Main extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/assets/icon.png"));
         window.getIcons().add(icon);
         //window.getStylesheets().add("Sample/test.css");
-
+        window.setResizable(false);
         window.setTitle("Chinese-checkers");
         window.setOnCloseRequest(e -> {
             e.consume();
@@ -48,9 +50,11 @@ public class Main extends Application {
 
         mainContainer.loadScreen(Main.StartingSceneID, Main.StartingSceneFile);
         mainContainer.loadScreen(Main.ChoosingSceneID, Main.ChoosingSceneFile);
+        mainContainer.loadScreen(Main.RulesSceneID, Main.RulesSceneFile);
         mainContainer.loadScreen(Main.PlayingSceneID, Main.PlayingSceneFile);
         mainContainer.loadScreen(Main.PlayersSceneID, Main.PlayersSceneFile);
         mainContainer.loadScreen(Main.NumberOfPlayersSceneID, Main.NumberOfPlayersSceneFile);
+
 
         mainContainer.setScene(Main.StartingSceneID);
 

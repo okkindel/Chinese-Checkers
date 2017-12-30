@@ -22,7 +22,7 @@ public class ChoosingScene implements Initializable {
 
     @FXML
     public void RulesButtonClicked(){
-        //TODO: scene with rules of the game
+        Main.mainContainer.setScene(Main.RulesSceneID);
     }
 
     @FXML

@@ -13,6 +13,7 @@ public class NumberOfPlayersScene implements Initializable {
     static int choice;
     public ChoiceBox<Integer> choiceBox = new ChoiceBox<>();
     public Button NextButton =  new Button();
+    public Button BackButton = new Button();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -22,7 +23,6 @@ public class NumberOfPlayersScene implements Initializable {
 
     public void NextButtonClicked() throws IOException {
         getChoice(choiceBox);
-
     }
 
     public void BackButtonClicked() {
@@ -39,7 +39,7 @@ public class NumberOfPlayersScene implements Initializable {
             System.out.println("three");
         }else if(NumberOfPlayersScene.choice == 2){
             System.out.println("two");
-        }else System.out.println("hahu");
+        }
         Main.mainContainer.setScene(Main.PlayersSceneID);
     }
 }
