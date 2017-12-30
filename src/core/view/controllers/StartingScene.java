@@ -25,11 +25,8 @@ public class StartingScene implements Initializable {
     }
 
     @FXML
-    public void StartGameButtonHandler() throws IOException {
-        Parent choosingSceneParent = FXMLLoader.load(getClass().getResource("/core/view/fxml/ChoosingScene.fxml"));
-        Main.choosingScene = new Scene(choosingSceneParent);
-        Main.window.setScene(Main.choosingScene);
-        Main.window.show();
+    public void StartGameButtonHandler(){
+        Main.mainContainer.setScene(Main.ChoosingSceneID);
     }
 
     @FXML

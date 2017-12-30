@@ -2,10 +2,7 @@ package core.view.controllers;
 
 import Sample.Main;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,10 +17,7 @@ public class ChoosingScene implements Initializable {
 
     @FXML
     public void PlayButtonClicked() throws IOException {
-        Parent choosingSceneParent = FXMLLoader.load(getClass().getResource("/core/view/fxml/NumberOfPlayersScene.fxml"));
-        Main.numberOfPlayersScene = new Scene(choosingSceneParent);
-        Main.window.setScene(Main.numberOfPlayersScene);
-        Main.window.show();
+        Main.mainContainer.setScene(Main.NumberOfPlayersSceneID);
     }
 
     @FXML
@@ -33,9 +27,7 @@ public class ChoosingScene implements Initializable {
 
     @FXML
     public void ReturnButtonClicked(){
-        Main.window.setScene(Main.startingScene);
-        Main.window.setResizable(false);
-        Main.window.show();
+        Main.mainContainer.setScene(Main.StartingSceneID);
     }
 
 

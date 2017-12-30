@@ -1,10 +1,7 @@
 package core.view.controllers;
 
 import Sample.Main;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
@@ -25,20 +22,24 @@ public class NumberOfPlayersScene implements Initializable {
 
     public void NextButtonClicked() throws IOException {
         getChoice(choiceBox);
-        Parent playersSceneParent = FXMLLoader.load(getClass().getResource("/core/view/fxml/PlayersScene.fxml"));
-        Main.playersScene = new Scene(playersSceneParent);
-        Main.window.setScene(Main.playersScene);
-        Main.window.show();
+
     }
 
     public void BackButtonClicked() {
-        Main.window.setScene(Main.choosingScene);
-        Main.window.setResizable(false);
-        Main.window.show();
+        Main.mainContainer.setScene(Main.ChoosingSceneID);
     }
 
     private static void getChoice(ChoiceBox<Integer> choiceBox){
         choice = choiceBox.getValue();
-        System.out.println(choice);
+        if(NumberOfPlayersScene.choice == 6){
+            System.out.println("six");
+        }else if(NumberOfPlayersScene.choice == 4){
+            System.out.println("four");
+        }else if(NumberOfPlayersScene.choice == 3){
+            System.out.println("three");
+        }else if(NumberOfPlayersScene.choice == 2){
+            System.out.println("two");
+        }else System.out.println("hahu");
+        Main.mainContainer.setScene(Main.PlayersSceneID);
     }
 }
