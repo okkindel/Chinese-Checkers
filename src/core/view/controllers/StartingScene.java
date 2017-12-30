@@ -32,13 +32,9 @@ public class StartingScene implements Initializable {
         Main.window.show();
     }
 
-    public void RulesButtonHandler(){
-
-    }
-
     @FXML
     public void ExitGameButtonHandler(){
-        ExitGameButton.setOnAction(e -> closeProgram());
+         closeProgram();
     }
 }
 

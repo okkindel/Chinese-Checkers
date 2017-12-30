@@ -24,7 +24,7 @@ public class NumberOfPlayersScene implements Initializable {
     }
 
     public void NextButtonClicked() throws IOException {
-        NextButton.setOnAction(e -> getChoice(choiceBox));
+        getChoice(choiceBox);
         Parent playersSceneParent = FXMLLoader.load(getClass().getResource("/core/view/fxml/PlayersScene.fxml"));
         Main.playersScene = new Scene(playersSceneParent);
         Main.window.setScene(Main.playersScene);
