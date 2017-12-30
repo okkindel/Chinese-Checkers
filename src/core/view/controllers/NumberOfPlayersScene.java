@@ -32,62 +32,25 @@ public class NumberOfPlayersScene implements Initializable {
         choice = choiceBox.getValue();
 
         if(NumberOfPlayersScene.choice == 6){
-            System.out.println("six");
-            PlayersScene.playersScene.label1.setVisible(true);
-            PlayersScene.playersScene.label2.setVisible(true);
-            PlayersScene.playersScene.label3.setVisible(true);
-            PlayersScene.playersScene.label4.setVisible(true);
-            PlayersScene.playersScene.label5.setVisible(true);
-            PlayersScene.playersScene.label6.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox1.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox2.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox3.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox4.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox5.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox6.setVisible(true);
+            hidePlayers(6,6);
         }else if(NumberOfPlayersScene.choice == 4){
-            System.out.println("four");
-            PlayersScene.playersScene.label1.setVisible(true);
-            PlayersScene.playersScene.label2.setVisible(true);
-            PlayersScene.playersScene.label3.setVisible(true);
-            PlayersScene.playersScene.label4.setVisible(true);
-            PlayersScene.playersScene.label5.setVisible(false);
-            PlayersScene.playersScene.label6.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox1.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox2.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox3.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox4.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox5.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox6.setVisible(false);
+            hidePlayers(4,6);
         }else if(NumberOfPlayersScene.choice == 3){
-            System.out.println("three");
-            PlayersScene.playersScene.label1.setVisible(true);
-            PlayersScene.playersScene.label2.setVisible(true);
-            PlayersScene.playersScene.label3.setVisible(true);
-            PlayersScene.playersScene.label4.setVisible(false);
-            PlayersScene.playersScene.label5.setVisible(false);
-            PlayersScene.playersScene.label6.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox1.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox2.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox3.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox4.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox5.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox6.setVisible(false);
+            hidePlayers(3,6);
         }else if(NumberOfPlayersScene.choice == 2){
-            System.out.println("two");
-            PlayersScene.playersScene.label1.setVisible(true);
-            PlayersScene.playersScene.label2.setVisible(true);
-            PlayersScene.playersScene.label3.setVisible(false);
-            PlayersScene.playersScene.label4.setVisible(false);
-            PlayersScene.playersScene.label5.setVisible(false);
-            PlayersScene.playersScene.label6.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox1.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox2.setVisible(true);
-            PlayersScene.playersScene.ChoiceBox3.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox4.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox5.setVisible(false);
-            PlayersScene.playersScene.ChoiceBox6.setVisible(false);
+            hidePlayers(2,6);
         }
         Main.mainContainer.setScene(Main.PlayersSceneID);
+    }
+
+    private void hidePlayers(int visibleNumberOfPlayers, int allPlayers){
+        for(int i=0; i<allPlayers; i++){
+            PlayersScene.playersScene.BoxArray.get(i).setVisible(true);
+            PlayersScene.playersScene.LabelArray.get(i).setVisible(true);
+        }
+        for(int j=5; j>=visibleNumberOfPlayers; j--){
+            PlayersScene.playersScene.BoxArray.get(j).setVisible(false);
+            PlayersScene.playersScene.LabelArray.get(j).setVisible(false);
+        }
     }
 }

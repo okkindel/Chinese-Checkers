@@ -12,14 +12,18 @@ import java.util.ResourceBundle;
 
 public class PlayersScene implements Initializable {
     public static PlayersScene playersScene;
+
     ArrayList<ChoiceBox<String>> BoxArray = new ArrayList<>();
+    ArrayList<Label> LabelArray = new ArrayList<>();
     ArrayList<String> choices = new ArrayList<>();
+
     public ChoiceBox<String> ChoiceBox1 = new ChoiceBox<>();
     public ChoiceBox<String> ChoiceBox2 = new ChoiceBox<>();
     public ChoiceBox<String> ChoiceBox3 = new ChoiceBox<>();
     public ChoiceBox<String> ChoiceBox4 = new ChoiceBox<>();
     public ChoiceBox<String> ChoiceBox5 = new ChoiceBox<>();
     public ChoiceBox<String> ChoiceBox6 = new ChoiceBox<>();
+
     public Label label1 = new Label();
     public Label label2 = new Label();
     public Label label3 = new Label();
@@ -32,9 +36,18 @@ public class PlayersScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         playersScene = this;
+
         choices.add("Empty");
         choices.add("Computer");
         choices.add("Human");
+
+        LabelArray.add(label1);
+        LabelArray.add(label2);
+        LabelArray.add(label3);
+        LabelArray.add(label4);
+        LabelArray.add(label5);
+        LabelArray.add(label6);
+
         BoxArray.add(ChoiceBox1);
         BoxArray.add(ChoiceBox2);
         BoxArray.add(ChoiceBox3);
@@ -46,7 +59,7 @@ public class PlayersScene implements Initializable {
             for (int i = 0; i < 3; i++) {
                 BoxArray.get(j).getItems().add(choices.get(i));
             }
-            BoxArray.get(j).setValue(choices.get(0));
+            BoxArray.get(j).setValue(choices.get(2));
         }
     }
 
