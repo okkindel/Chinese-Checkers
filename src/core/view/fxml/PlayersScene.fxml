@@ -8,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="454.0" prefWidth="536.0" style="-fx-background-color: BEIGE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.view.controllers.PlayersScene">
    <children>
       <Label layoutX="190.0" layoutY="14.0" prefHeight="53.0" prefWidth="220.0" text="Players">
@@ -20,17 +19,17 @@
       <Button fx:id="BackButton" layoutX="347.0" layoutY="374.0" mnemonicParsing="false" onAction="#BackButtonClicked" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #f47742;" text="Back" />
       <VBox layoutX="46.0" layoutY="67.0" prefHeight="294.0" prefWidth="269.0" spacing="10.0">
          <children>
-            <Label text="Player 1" />
+            <Label fx:id="label1" text="Player 1" />
             <ChoiceBox fx:id="ChoiceBox1" prefWidth="150.0" />
-            <Label text="Player 2" />
+            <Label fx:id="label2" text="Player 2" />
             <ChoiceBox fx:id="ChoiceBox2" prefWidth="150.0" />
-            <Label text="Player 3" />
+            <Label fx:id="label3" text="Player 3" />
             <ChoiceBox fx:id="ChoiceBox3" prefWidth="150.0" />
-            <Label text="Player 4" />
+            <Label fx:id="label4" text="Player 4" />
             <ChoiceBox fx:id="ChoiceBox4" prefWidth="150.0" />
-            <Label text="Player 5" />
+            <Label fx:id="label5" text="Player 5" />
             <ChoiceBox fx:id="ChoiceBox5" prefWidth="150.0" />
-            <Label text="Player 6" />
+            <Label fx:id="label6" text="Player 6" />
             <ChoiceBox fx:id="ChoiceBox6" prefWidth="150.0" />
          </children>
          <padding>
