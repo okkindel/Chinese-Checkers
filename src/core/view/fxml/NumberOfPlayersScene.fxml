@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="216.0" prefWidth="565.0" style="-fx-background-color: BEIGE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.view.controllers.NumberOfPlayersScene">
+   <children>
+      <ChoiceBox fx:id="choiceBox" layoutX="36.0" layoutY="84.0" prefHeight="47.0" prefWidth="163.0" />
+      <Label layoutX="126.0" layoutY="14.0" prefHeight="66.0" prefWidth="313.0" text="Number of players">
+         <font>
+            <Font name="BankGothic Md BT Medium" size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="BackButton" layoutX="369.0" layoutY="155.0" mnemonicParsing="false" onAction="#BackButtonClicked" prefHeight="47.0" prefWidth="175.0" style="-fx-background-color: #f47742;" text="BACK">
+         <font>
+            <Font name="BankGothic Md BT Medium" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="NextButton" layoutX="169.0" layoutY="155.0" mnemonicParsing="false" onAction="#NextButtonClicked" prefHeight="47.0" prefWidth="175.0" style="-fx-background-color: #41b2f4;" text="NEXT">
+         <font>
+            <Font name="BankGothic Md BT Medium" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
