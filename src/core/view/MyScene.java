@@ -38,11 +38,13 @@ public class MyScene {
         }
     }
 
+
     //This method tries to display the screen with a predefined name.
     public boolean setScene(String name){
         if(scenes.get(name) != null){ //scene loaded
             //TODO: make opacity etc
             Main.window.setScene(scenes.get(name));
+            Main.window.centerOnScreen();
             Main.window.show();
             return true;
         }else {

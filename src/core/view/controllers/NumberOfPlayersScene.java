@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public class NumberOfPlayersScene implements Initializable {
 
-    static int choice;
+
     public ChoiceBox<Integer> choiceBox = new ChoiceBox<>();
 
     @Override
@@ -29,15 +29,15 @@ public class NumberOfPlayersScene implements Initializable {
     }
 
     private void getChoice(ChoiceBox<Integer> choiceBox){
-        choice = choiceBox.getValue();
+        int choice = choiceBox.getValue();
 
-        if(NumberOfPlayersScene.choice == 6){
+        if(choice == 6){
             hidePlayers(6,6);
-        }else if(NumberOfPlayersScene.choice == 4){
+        }else if(choice == 4){
             hidePlayers(4,6);
-        }else if(NumberOfPlayersScene.choice == 3){
+        }else if(choice == 3){
             hidePlayers(3,6);
-        }else if(NumberOfPlayersScene.choice == 2){
+        }else if(choice == 2){
             hidePlayers(2,6);
         }
         Main.mainContainer.setScene(Main.PlayersSceneID);
@@ -48,7 +48,7 @@ public class NumberOfPlayersScene implements Initializable {
             PlayersScene.playersScene.BoxArray.get(i).setVisible(true);
             PlayersScene.playersScene.LabelArray.get(i).setVisible(true);
         }
-        for(int j=5; j>=visibleNumberOfPlayers; j--){
+        for(int j=allPlayers-1; j>=visibleNumberOfPlayers; j--){
             PlayersScene.playersScene.BoxArray.get(j).setVisible(false);
             PlayersScene.playersScene.LabelArray.get(j).setVisible(false);
         }

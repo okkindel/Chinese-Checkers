@@ -31,8 +31,6 @@ public class PlayersScene implements Initializable {
     public Label label5 = new Label();
     public Label label6 = new Label();
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         playersScene = this;

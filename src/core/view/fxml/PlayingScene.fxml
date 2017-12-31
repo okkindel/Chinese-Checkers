@@ -7,20 +7,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.view.controllers.PlayingScene">
+
+<AnchorPane fx:id="panel" prefHeight="682.0" prefWidth="857.0" style="-fx-background-color: BEIGE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.view.controllers.PlayingScene">
    <children>
-      <SplitPane dividerPositions="0.7841726618705036" layoutX="34.0" layoutY="42.0" prefHeight="724.0" prefWidth="922.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ImageView fitHeight="646.0" fitWidth="703.0" layoutX="7.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../assets/chineseCheckersBoard.png" />
-                     </image>
-                  </ImageView>
-               </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="566.0" prefWidth="226.0" />
-        </items>
-      </SplitPane>
+      <ImageView fitHeight="773.0" fitWidth="857.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/chineseCheckersBoard.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
