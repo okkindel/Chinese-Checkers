@@ -23,7 +23,7 @@ public class PlayingScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        circle = new Circle(10, Color.RED);
+        circle = new Circle(10.5, Color.RED);
         circle.setCenterX(50);
         circle.setCenterY(50);
         circle.setOnMousePressed(circleOnMousePressedEventHandler);

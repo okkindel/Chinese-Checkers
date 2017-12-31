@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -15,5 +16,15 @@
             <Image url="@../../../assets/chineseCheckersBoard.png" />
          </image>
       </ImageView>
+      <Circle fill="DODGERBLUE" layoutX="428.0" layoutY="123.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="428.0" layoutY="188.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="461.0" layoutY="188.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="396.0" layoutY="188.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="412.0" layoutY="221.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="445.0" layoutY="221.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="478.0" layoutY="221.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="379.0" layoutY="221.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="445.0" layoutY="155.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="412.0" layoutY="155.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
