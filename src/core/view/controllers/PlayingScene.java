@@ -1,12 +1,10 @@
 package core.view.controllers;
 
-import Sample.Main;
-import core.view.MyScene;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
@@ -23,30 +21,35 @@ public class PlayingScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        circle = new Circle(10.5, Color.RED);
-        circle.setCenterX(50);
-        circle.setCenterY(50);
-        circle.setOnMousePressed(circleOnMousePressedEventHandler);
-        circle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-        panel.getChildren().add(circle);
+        for(int i=0; i<60; i++){
+            panel.getChildren().get(i).setOnMousePressed(NodeOnMousePressedEventHandler);
+            panel.getChildren().get(i).setOnMouseDragged(NodeOnMouseDraggedEventHandler);
+        }
+
+//        circle = new Circle(10.5, Color.RED);
+//        circle.setCenterX(50);
+//        circle.setCenterY(50);
+//        circle.setOnMousePressed(NodeOnMousePressedEventHandler);
+//        circle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+//        panel.getChildren().add(circle);
     }
 
 
 
 
-    EventHandler<MouseEvent> circleOnMousePressedEventHandler =
+    EventHandler<MouseEvent> NodeOnMousePressedEventHandler =
             new EventHandler<MouseEvent>() {
 
                 @Override
                 public void handle(MouseEvent t) {
                     orgSceneX = t.getSceneX();
                     orgSceneY = t.getSceneY();
-                    orgTranslateX = ((Circle)(t.getSource())).getTranslateX();
-                    orgTranslateY = ((Circle)(t.getSource())).getTranslateY();
+                    orgTranslateX = ((Node)(t.getSource())).getTranslateX();
+                    orgTranslateY = ((Node)(t.getSource())).getTranslateY();
                 }
             };
 
-    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler =
+    EventHandler<MouseEvent> NodeOnMouseDraggedEventHandler =
             new EventHandler<MouseEvent>() {
 
                 @Override
@@ -56,8 +59,8 @@ public class PlayingScene implements Initializable {
                     double newTranslateX = orgTranslateX + offsetX;
                     double newTranslateY = orgTranslateY + offsetY;
 
-                    ((Circle)(t.getSource())).setTranslateX(newTranslateX);
-                    ((Circle)(t.getSource())).setTranslateY(newTranslateY);
+                    ((Node)(t.getSource())).setTranslateX(newTranslateX);
+                    ((Node)(t.getSource())).setTranslateY(newTranslateY);
                 }
             };
 }
