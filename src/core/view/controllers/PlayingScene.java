@@ -21,9 +21,16 @@ public class PlayingScene implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        for(int i=0; i<60; i++){
-            panel.getChildren().get(i).setOnMousePressed(NodeOnMousePressedEventHandler);
-            panel.getChildren().get(i).setOnMouseDragged(NodeOnMouseDraggedEventHandler);
+//        for(int i=0; i<60; i++){
+//            panel.getChildren().get(i).setOnMousePressed(NodeOnMousePressedEventHandler);
+//            panel.getChildren().get(i).setOnMouseDragged(NodeOnMouseDraggedEventHandler);
+//        }
+
+        for(Node node: panel.getChildren()){
+            if(node instanceof Circle){
+                node.setOnMousePressed(NodeOnMousePressedEventHandler);
+                node.setOnMouseDragged(NodeOnMouseDraggedEventHandler);
+            }
         }
 
 //        circle = new Circle(10.5, Color.RED);
