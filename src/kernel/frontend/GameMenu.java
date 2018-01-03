@@ -60,7 +60,7 @@ public class GameMenu extends AbstractView {
         not_main_panel.setBackground(new Color(40, 0, 0));
         window.add(main_panel, BorderLayout.NORTH);
         window.add(not_main_panel, BorderLayout.SOUTH);
-        window.setSize(new Dimension(500, 800));
+        window.setSize(new Dimension(500, 300));
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);

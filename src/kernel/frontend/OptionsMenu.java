@@ -184,6 +184,7 @@ class OptionsMenu extends AbstractView {
 
         window.setSize(new Dimension(1000, 225));
         window.setLocationRelativeTo(null);
+        window.pack();
         window.setVisible(true);
     }
 

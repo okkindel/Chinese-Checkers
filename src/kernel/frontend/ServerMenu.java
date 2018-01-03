@@ -52,6 +52,7 @@ class ServerMenu extends AbstractView {
         ip_field.setColumns(15);
         port_field.setColumns(6);
         window.setSize(new Dimension(500, 100));
+        window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
