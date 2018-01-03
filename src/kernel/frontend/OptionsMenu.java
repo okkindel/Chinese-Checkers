@@ -1,7 +1,4 @@
-package checkers.backend;
-
-import kernel.frontend.AbstractView;
-import kernel.frontend.AssetsLoader;
+package kernel.frontend;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +11,7 @@ import java.io.IOException;
 /**
  * Options menu for checkers.
  */
-public class OptionsMenu extends AbstractView {
+class OptionsMenu extends AbstractView {
 
     private JComboBox<? extends String> playerOneTypeComboBox;
     private JComboBox<? extends String> playerTwoTypeComboBox;
@@ -32,7 +29,7 @@ public class OptionsMenu extends AbstractView {
     private JButton save;
     private JButton close;
 
-    public OptionsMenu() {
+    OptionsMenu() {
         save = new JButton("Save");
         close = new JButton("Close");
         close.addActionListener(new Close());
@@ -42,6 +39,7 @@ public class OptionsMenu extends AbstractView {
     }
 
     private void drawOptions() {
+
         super.paint();
         window.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 

@@ -63,34 +63,75 @@ public class BoardView extends AbstractView implements Observer {
     }
 
     /**
-     * Draws a selected piece, also does some checks that there is a piece and that the piece belongs to the correct person.
-     * If either of the checks fails, simply updates the message box to reflect this instead.
-     *
-     * @param pos_x The x position of the tile to paint as selected
-     * @param pos_y The y position of the tile to paint as selected
+     * Mouse listener that performs the tasks needed for the user to interact with the graphical interface
      */
+    private class gridListener extends MouseAdapter {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            //if both player AIs, call next player, since we can't call it before board drawn
+            if (board.player_list_getter().get(0).isRobot() && board.player_list_getter().get(1).isRobot()) {
+                board.nextPlayer();
+                return;
+            }
+
+            if (board.local_player_getter() != null && board.active_player_getter() != board.local_player_getter()) { //if the local player has been set, and the active player isn't the player who owns this board, we want to wait for a move
+                board.w8_4_move();
+                return;
+            }
+
+            int xPos, yPos;
+
+            if (!(e.getX() > start_x && e.getX() < 525 && e.getY() > start_y && e.getY() < 544)) { //user clicked outside of the checkers area
+                return; //so we don't need to do anything else and we can return
+            }
+
+            xPos = ((e.getX() - start_x) / pawn_width); //this division converts the position in pixels to the tile numbers needed to interact with the backend
+            yPos = ((e.getY() - start_y) / pawn_height);
+
+            if (!(yPos % 2 == 0)) { //if it's on an odd row, (1,3,5)
+                xPos = (((e.getX() - start_x) + (pawn_width / 2)) / pawn_width) - 1; //+13 to the x position, so that the tile is shifted over half a tile's worth of x, the -1 puts it back in bounds for checking against arrays etc
+            }
+
+            if (tile_selected == null) { //if the player hasn't selected a tile
+                tile_selected = board.getTiles()[xPos][yPos]; //then we select a tile
+                drawSelected(xPos, yPos); //and paint that the user selected that tile
+            } else {
+                board.move(tile_selected, board.getTiles()[xPos][yPos]); //otherwise, the user has a selected tile, so we move the piece to the new tile
+                tile_selected = null; //and set the placeholder for the selected tile to null so the player can select a tile next turn
+            }
+        }
+    }
+
+    /**
+     * Draws a selected piece, checks that there is a piece and belonging.
+     *
+     * @param pos_x The x position.
+     * @param pos_y The y position.
+     * */
     private void drawSelected(int pos_x, int pos_y) {
-        if (board.getTiles()[pos_x][pos_y].getPawn() == null) { //this means there's no piece in the tile
-            update(board, "msg-" + "Select a piece"); //so we tell the user as such
-            tile_selected = null; //reset the selected tile so the user can select another tile
-            return; //and return from the method since we don't need to do any more here
+
+        if (board.getTiles()[pos_x][pos_y].getPawn().getOwner() != board.active_player_getter()) {
+            update(board, "msg-" + "Not yours pawn");
+            tile_selected = null;
+            return;
+        }
+        if (board.getTiles()[pos_x][pos_y].getPawn() == null) {
+            update(board, "msg-" + "Select a piece");
+            tile_selected = null;
+            return;
         }
 
-        if (board.getTiles()[pos_x][pos_y].getPawn().getOwner() != board.active_player_getter()) { //this means that the active player is not the owner of the piece
-            update(board, "msg-" + "Not yours pawn"); //so we inform the user
-            tile_selected = null; //reset the selected tile
-            return; //and return from the method
+        int width = start_x + (pos_x * pawn_width);
+        int height = start_y + (pos_y * pawn_height);
+
+        //for odd row
+        if (!(pos_y % 2 == 0)) {
+            width += (pawn_width / 2);
         }
 
-        int wid = start_x + (pos_x * pawn_width); //if we get here it means the selection is valid, so we convert the x and y to the pixel values of x and y
-        int hig = start_y + (pos_y * pawn_height);
-
-        if (!(pos_y % 2 == 0)) { //if it's on an odd row, (1,3,5)
-            wid += (pawn_width / 2); //then we shift it over half a space
-        }
-
-        getGraphics().drawImage(selected_image, wid, hig, null); //and paint the selected tile image over the piece image that should already be in place
-        drawViableMoves(pos_x, pos_y); //then from here we can paint the viable moves of the selection
+        getGraphics().drawImage(selected_image, width, height, null);
+        drawViableMoves(pos_x, pos_y);
     }
 
     /**
@@ -151,7 +192,7 @@ public class BoardView extends AbstractView implements Observer {
                     switch (board.player_list_getter().indexOf(board.getTiles()[x][y].getPawn().getOwner())) { //get the owner
                         case 0:
                             players_pawn_image = (BufferedImage) AssetsLoader.load("src/assets/pawn_blue.png", "image");
-                            break; //get the image for the colour of piece to use
+                            break;
                         case 1:
                             players_pawn_image = (BufferedImage) AssetsLoader.load("src/assets/pawn_red.png", "image");
                             break;
@@ -186,57 +227,18 @@ public class BoardView extends AbstractView implements Observer {
         //paint pieces end
         show_msg(getGraphics()); //now that we've repainted, we redraw the message in case it's also changed
     }
-
     /**
-     * Shows the available moves as a hint to the player. Available moves should show as a green highlight.
+     * Shows the available moves - hint.
      */
     void showAvailableMoves() {
-        for (int y = 0; y < 17; y++) { //iterates through the whole board
-            for (int x = 0; x < 13; x++) { //this works by using the array of integers to decide which tiles are accessible, and then adding that tile to the array of tiles
-                GamePawn piece = board.getTiles()[x][y].getPawn(); //gets the piece in the tile we're currently looking in
-                if (piece != null && piece.getOwner() == board.active_player_getter()) { //if the piece belongs to the user that asked for the hint
-                    drawViableMoves(x, y); //then we call the viable moves method, which draws all the viable moves for that piece
+        //whole board
+        for (int y = 0; y < 17; y++) {
+            //which tiles are accessible
+            for (int x = 0; x < 13; x++) {
+                GamePawn piece = board.getTiles()[x][y].getPawn();
+                if (piece != null && piece.getOwner() == board.active_player_getter()) {
+                    drawViableMoves(x, y);
                 }
-            }
-        }
-    }
-
-    /**
-     * Mouse listener that performs the tasks needed for the user to interact with the graphical interface
-     */
-    private class gridListener extends MouseAdapter {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            //if both player AIs, call next player, since we can't call it before board drawn
-            if (board.player_list_getter().get(0).isRobot() && board.player_list_getter().get(1).isRobot()) {
-                board.nextPlayer();
-                return;
-            }
-
-            if (board.local_player_getter() != null && board.active_player_getter() != board.local_player_getter()) { //if the local player has been set, and the active player isn't the player who owns this board, we want to wait for a move
-                board.w8_4_move();
-                return;
-            }
-
-            int xPos, yPos;
-
-            if (!(e.getX() > start_x && e.getX() < 525 && e.getY() > start_y && e.getY() < 544)) { //user clicked outside of the checkers area
-                return; //so we don't need to do anything else and we can return
-            }
-
-            xPos = ((e.getX() - start_x) / pawn_width); //this division converts the position in pixels to the tile numbers needed to interact with the backend
-            yPos = ((e.getY() - start_y) / pawn_height);
-
-            if (!(yPos % 2 == 0)) { //if it's on an odd row, (1,3,5)
-                xPos = (((e.getX() - start_x) + (pawn_width / 2)) / pawn_width) - 1; //+13 to the x position, so that the tile is shifted over half a tile's worth of x, the -1 puts it back in bounds for checking against arrays etc
-            }
-
-            if (tile_selected == null) { //if the player hasn't selected a tile
-                tile_selected = board.getTiles()[xPos][yPos]; //then we select a tile
-                drawSelected(xPos, yPos); //and paint that the user selected that tile
-            } else {
-                board.move(tile_selected, board.getTiles()[xPos][yPos]); //otherwise, the user has a selected tile, so we move the piece to the new tile
-                tile_selected = null; //and set the placeholder for the selected tile to null so the player can select a tile next turn
             }
         }
     }
