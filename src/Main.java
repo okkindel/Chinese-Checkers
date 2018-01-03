@@ -1,8 +1,10 @@
-import core.view.Menu;
+import kernel.frontend.GameMenu;
 
+/**
+ * Just Simple Main Class :)
+ */
 public class Main {
-
     public static void main(String[] args) {
-        new Menu();
+        new GameMenu();
     }
 }
