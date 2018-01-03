@@ -52,7 +52,7 @@ public abstract class AbstractView extends JPanel implements Observer {
     protected void show_msg(Graphics g) {
         g.drawImage(box, 50, 0, null);
         g.setFont(new Font("Sheriff", Font.PLAIN, 20));
-        g.drawString(message, 70, 22);
+        g.drawString(message, 100, 20);
     }
 
     /**
