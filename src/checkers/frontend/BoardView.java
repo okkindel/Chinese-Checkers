@@ -63,7 +63,7 @@ public class BoardView extends AbstractView implements Observer {
     }
 
     /**
-     * Mouse listener that performs the tasks needed for the user to interact with the graphical interface
+     * Mouse listener - user interact with the graphical interface.
      */
     private class gridListener extends MouseAdapter {
 
@@ -75,30 +75,34 @@ public class BoardView extends AbstractView implements Observer {
                 return;
             }
 
-            if (board.local_player_getter() != null && board.active_player_getter() != board.local_player_getter()) { //if the local player has been set, and the active player isn't the player who owns this board, we want to wait for a move
+            //wait for a move
+            if (board.local_player_getter() != null && board.active_player_getter() != board.local_player_getter()) {
                 board.w8_4_move();
                 return;
             }
 
-            int xPos, yPos;
+            int pos_x, pos_y;
 
-            if (!(e.getX() > start_x && e.getX() < 525 && e.getY() > start_y && e.getY() < 544)) { //user clicked outside of the checkers area
-                return; //so we don't need to do anything else and we can return
+            //out of band
+            if (!(e.getX() > start_x && e.getX() < 525 && e.getY() > start_y && e.getY() < 544)) {
+                return;
             }
 
-            xPos = ((e.getX() - start_x) / pawn_width); //this division converts the position in pixels to the tile numbers needed to interact with the backend
-            yPos = ((e.getY() - start_y) / pawn_height);
+            //converts pixels to the tile numbers to interact with backend
+            pos_x = ((e.getX() - start_x) / pawn_width);
+            pos_y = ((e.getY() - start_y) / pawn_height);
 
-            if (!(yPos % 2 == 0)) { //if it's on an odd row, (1,3,5)
-                xPos = (((e.getX() - start_x) + (pawn_width / 2)) / pawn_width) - 1; //+13 to the x position, so that the tile is shifted over half a tile's worth of x, the -1 puts it back in bounds for checking against arrays etc
+            //for odd row
+            if (!(pos_y % 2 == 0)) {
+                pos_x = (((e.getX() - start_x) + (pawn_width / 2)) / pawn_width) - 1;
             }
 
-            if (tile_selected == null) { //if the player hasn't selected a tile
-                tile_selected = board.getTiles()[xPos][yPos]; //then we select a tile
-                drawSelected(xPos, yPos); //and paint that the user selected that tile
+            if (tile_selected == null) {
+                tile_selected = board.getTiles()[pos_x][pos_y];
+                drawSelected(pos_x, pos_y);
             } else {
-                board.move(tile_selected, board.getTiles()[xPos][yPos]); //otherwise, the user has a selected tile, so we move the piece to the new tile
-                tile_selected = null; //and set the placeholder for the selected tile to null so the player can select a tile next turn
+                board.move(tile_selected, board.getTiles()[pos_x][pos_y]);
+                tile_selected = null;
             }
         }
     }
@@ -108,19 +112,21 @@ public class BoardView extends AbstractView implements Observer {
      *
      * @param pos_x The x position.
      * @param pos_y The y position.
-     * */
+     */
     private void drawSelected(int pos_x, int pos_y) {
 
-        if (board.getTiles()[pos_x][pos_y].getPawn().getOwner() != board.active_player_getter()) {
-            update(board, "msg-" + "Not yours pawn");
-            tile_selected = null;
-            return;
-        }
-        if (board.getTiles()[pos_x][pos_y].getPawn() == null) {
-            update(board, "msg-" + "Select a piece");
-            tile_selected = null;
-            return;
-        }
+        try {
+            if (board.getTiles()[pos_x][pos_y].getPawn().getOwner() != board.active_player_getter()) {
+                update(board, "msg-" + "Not yours pawn");
+                tile_selected = null;
+                return;
+            }
+
+            if (board.getTiles()[pos_x][pos_y].getPawn() == null) {
+                update(board, "msg-" + "Select a piece");
+                tile_selected = null;
+                return;
+            }
 
         int width = start_x + (pos_x * pawn_width);
         int height = start_y + (pos_y * pawn_height);
@@ -132,37 +138,40 @@ public class BoardView extends AbstractView implements Observer {
 
         getGraphics().drawImage(selected_image, width, height, null);
         drawViableMoves(pos_x, pos_y);
+        } catch (Exception ignore) { /*nothing here*/}
     }
 
     /**
-     * Uses the drawViableMove method to paint all the available moves for the user
+     * All available moves for the user
      *
-     * @param x the x position of the source tile
-     * @param y the y position of the source tile
+     * @param pos_x the x position.
+     * @param pos_y the y position.
      */
-    private void drawViableMoves(int x, int y) {
-        ArrayList<GameField[]> moves = board.findMoves(board.getTiles()[x][y]); //get all the possible moves that the source tile can make
+    private void drawViableMoves(int pos_x, int pos_y) {
+        //get all possible moves
+        ArrayList<GameField[]> moves = board.findMoves(board.getTiles()[pos_x][pos_y]);
 
-        if (moves.isEmpty()) { // if there are no moves, we simply return, since there's nothing more we can do
+        //if no moves
+        if (moves.isEmpty()) {
             return;
         }
 
         for (GameField[] move : moves) { //iterate through all the possible moves
-            drawViableMove(move[1].getX(), move[1].getY()); //and then paint them using the drawViableMove method
+            simpleMove(move[1].getX(), move[1].getY()); //and then paint them using the simpleMove method
         }
     }
 
     /**
      * Draws a move representation, on the given tile number, by converting the tile number to the pixel values for width and height
      *
-     * @param xPos the x position of the tile to paint as a viable move
-     * @param yPos the y position of the tile to paint as a viable move
+     * @param pos_x the x position of the tile to paint as a viable move
+     * @param pos_y the y position of the tile to paint as a viable move
      */
-    private void drawViableMove(int xPos, int yPos) {
-        int wid = start_x + (xPos * pawn_width); //convert the tile numbers to pixel values
-        int hig = start_y + (yPos * pawn_height);
+    private void simpleMove(int pos_x, int pos_y) {
+        int wid = start_x + (pos_x * pawn_width); //convert the tile numbers to pixel values
+        int hig = start_y + (pos_y * pawn_height);
 
-        if (!(yPos % 2 == 0)) { //if it's on an even row
+        if (!(pos_y % 2 == 0)) { //if it's on an even row
             wid += (pawn_width / 2); //then we shift it over half a space
         }
 
@@ -227,6 +236,7 @@ public class BoardView extends AbstractView implements Observer {
         //paint pieces end
         show_msg(getGraphics()); //now that we've repainted, we redraw the message in case it's also changed
     }
+
     /**
      * Shows the available moves - hint.
      */

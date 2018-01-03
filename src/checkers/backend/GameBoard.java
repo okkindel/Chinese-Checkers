@@ -96,7 +96,7 @@ public class GameBoard extends AbstractBoard {
         setChanged();
         notifyObservers();
 
-        if (checkWinCondition()) {
+        if (check_if_win()) {
             setChanged();
             notifyObservers("msg-" + activePlayer.getName() + " wins!");
             return;
@@ -117,7 +117,7 @@ public class GameBoard extends AbstractBoard {
      *
      * @return True if the checkers has been won.
      */
-    private boolean checkWinCondition() {
+    private boolean check_if_win() {
         boolean ret = false;
 
         switch (player_list.indexOf(activePlayer)) {
@@ -230,7 +230,7 @@ public class GameBoard extends AbstractBoard {
      * <p>
      * The following might look a little complex, but it is necessary.
      * Since the movement of a piece is not in a square grid, but in a hex shape, we need to shave the corners off.
-     * However, since the board is comprised by shifting the rows to make it shaped correctly, this means that the corners that we need to
+     * Since the board is comprised by shifting the rows to make it shaped correctly, this means that the corners that we need to
      * shave off are different depending on whether the row is a 'shifted' one or not.
      **/
     public ArrayList<GameField[]> findMoves(GameField start) {
@@ -275,12 +275,15 @@ public class GameBoard extends AbstractBoard {
                     }
 
                     //if space is free to jump
-                    boolean emptyDestination = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].getPawn() == null);
-                    //if accessible cell
-                    boolean accessible = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].available_getter());
-                    if (emptyDestination && accessible) {
-                        foundMoves.add(new GameField[]{start, getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)]});
-                    }
+                    try {
+                        boolean emptyDestination = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].getPawn() == null);
+
+                        //if accessible cell
+                        boolean accessible = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].available_getter());
+                        if (emptyDestination && accessible) {
+                            foundMoves.add(new GameField[]{start, getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)]});
+                        }
+                    } catch (Exception ignore) { /*nothing here*/}
                 }
             }
         }
