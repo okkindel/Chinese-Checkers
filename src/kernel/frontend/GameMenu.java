@@ -42,6 +42,7 @@ public class GameMenu extends AbstractView {
         options.addActionListener(new Options());
         make_server.addActionListener(new ServerHost());
         join_server.addActionListener(new JoinGame());
+        exit.addActionListener(new ExitGame());
         AssetsLoader.loadProperties();
         paint();
     }
@@ -204,6 +205,17 @@ public class GameMenu extends AbstractView {
         @Override
         public void actionPerformed(ActionEvent e) {
             drawNetPlayOptions();
+        }
+
+    }
+
+    /**
+     * Game exit
+     */
+    private class ExitGame implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
         }
 
     }
