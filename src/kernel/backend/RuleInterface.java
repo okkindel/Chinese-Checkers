@@ -10,7 +10,7 @@ public interface RuleInterface {
      *
      * @param abstractBoard the board :v
      * @param undoInterface The undoInterface where rule is checked against
-     * @returns A boolean
+     * @return A boolean
      */
     boolean checkValid(AbstractBoard abstractBoard, UndoInterface undoInterface);
 

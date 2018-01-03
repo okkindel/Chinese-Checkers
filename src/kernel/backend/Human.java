@@ -7,7 +7,7 @@ package kernel.backend;
 public class Human extends Participant {
 
     Human(String name) {
-        super(name); //TODO REMOVE THIS SHIT
+        super(name); //TODO: REMOVE THIS SHIT
     }
 
     @Override

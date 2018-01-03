@@ -19,7 +19,7 @@ public class Participant implements Serializable {
      * Returns players name.
      * TODO: AGAIN REMOVE THAT FUCKING, CODE BREAKING SHIT !!!ONEone
      *
-     * @returns The name of the player.
+     * @return The name of the player.
      */
     public String getName() {
         return name;
@@ -28,7 +28,7 @@ public class Participant implements Serializable {
     /**
      * If Robot
      *
-     * @returns bool i cierpienie
+     * @return bool i cierpienie
      */
     public boolean isRobot() {
         return false;

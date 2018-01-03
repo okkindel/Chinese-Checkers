@@ -17,8 +17,8 @@ import javax.swing.*;
 public abstract class AbstractView extends JPanel implements Observer {
 
     protected JFrame window;
-    protected JPanel main_panel;
-    protected JPanel not_main_panel;
+    JPanel main_panel;
+    JPanel not_main_panel;
     protected BufferedImage wallpaper;
     private BufferedImage box = (BufferedImage) AssetsLoader.load("src/assets/box.png", "image");
     private String message = "null";
@@ -42,7 +42,7 @@ public abstract class AbstractView extends JPanel implements Observer {
     /**
      * Shows error msg.
      */
-    public static void displayError(String errorMessage) {
+    static void displayError(String errorMessage) {
         JOptionPane.showMessageDialog(new JFrame(), errorMessage);
     }
 

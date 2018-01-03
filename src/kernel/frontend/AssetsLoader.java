@@ -118,7 +118,7 @@ public class AssetsLoader {
     /**
      * Loading options.
      */
-    public static void loadProperties() {
+    static void loadProperties() {
         FileInputStream fileInputStream;
         try {
             fileInputStream = new FileInputStream("src/assets/options.json");

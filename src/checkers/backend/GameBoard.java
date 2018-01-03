@@ -269,8 +269,7 @@ public class GameBoard extends AbstractBoard {
                         position_x + xOffset * 2 > 12 || position_y + yOffset * 2 > 16)) {
                     if (shifted_row && !((position_y + yOffset * 2) == position_y)) {
                         position_x -= 1;
-                    } else if (yOffset == 0) {
-                    } else {
+                    } else if (yOffset != 0) {
                         position_x += 1;
                     }
 
@@ -438,9 +437,7 @@ public class GameBoard extends AbstractBoard {
 
         if (activePlayer != local_player) {
             do {
-                while (msg_in == null) {
-                }
-                //message is received and we need to parse it
+                while (msg_in == null) { /*message is received and we need to parse it*/ }
                 String[] split = msg_in.split(",");
                 GameField previous = getTiles()[Integer.parseInt(split[0])][Integer.parseInt(split[1])];
                 GameField destiny = getTiles()[Integer.parseInt(split[2])][Integer.parseInt(split[3])];

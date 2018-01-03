@@ -18,7 +18,7 @@ public class GameField extends AbstractField {
     /**
      * Return coordinates as a string.
      *
-     * @returns x and y coordinates, with , as separator
+     * @return x and y coordinates, with , as separator
      */
     String coordinates_getter() {
         return x + "," + y;

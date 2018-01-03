@@ -104,7 +104,8 @@ class ServerMenu extends AbstractView {
                     GameBoard board = new GameBoard();
                     board.runServer();
                     board.local_player_setter(board.player_list_getter().get(0));
-                    while (!board.connect_getter()) {
+                    while (true) {
+                        if (board.connect_getter()) break;
                     }
                     window.setVisible(false);
                     new GameView(board);
