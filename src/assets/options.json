@@ -1,13 +1,13 @@
-#Wed Jan 03 21:47:18 CET 2018
+#Wed Jan 03 22:00:31 CET 2018
 playerThree.name=Yellow
-checkers.playerTwo.type=1
+checkers.playerTwo.type=0
 playerOne.name=Blue
 playerFour.name=Green
 playerTwo.name=Red
-checkers.playerThree.type=1
+checkers.playerThree.type=2
 playerSix.name=Black
-checkers.playerSix.type=1
-checkers.playerFive.type=1
+checkers.playerSix.type=2
+checkers.playerFive.type=2
 playerFive.name=White
-checkers.playerFour.type=1
-checkers.playerOne.type=1
+checkers.playerFour.type=2
+checkers.playerOne.type=0

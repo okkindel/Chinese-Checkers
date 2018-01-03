@@ -77,7 +77,7 @@ class ServerMenu extends AbstractView {
         not_main_panel.setBackground(new Color(40, 0, 0));
         window.add(main_panel, BorderLayout.CENTER);
         window.add(not_main_panel, BorderLayout.SOUTH);
-        window.setSize(new Dimension(550, 100));
+        window.setSize(new Dimension(550, 150));
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
@@ -128,28 +128,3 @@ class ServerMenu extends AbstractView {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

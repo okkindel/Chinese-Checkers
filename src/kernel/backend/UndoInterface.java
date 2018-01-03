@@ -6,6 +6,5 @@ package kernel.backend;
  */
 public interface UndoInterface {
     void execute();
-
     void undo();
 }
