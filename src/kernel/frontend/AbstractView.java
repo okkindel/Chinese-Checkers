@@ -33,6 +33,7 @@ public abstract class AbstractView extends JPanel implements Observer {
     protected void paint() {
         Image icon = (Image) AssetsLoader.load("src/assets/icon.png", "image");
         window = new JFrame("Chinese Checkers");
+        window.setResizable(false);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setIconImage(icon);
         main_panel = new JPanel();
