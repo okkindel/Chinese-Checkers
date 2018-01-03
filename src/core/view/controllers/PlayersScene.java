@@ -35,9 +35,9 @@ public class PlayersScene implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         playersScene = this;
 
-        choices.add("Empty");
-        choices.add("Computer");
         choices.add("Human");
+        choices.add("Computer");
+        choices.add("Empty");
 
         LabelArray.add(label1);
         LabelArray.add(label2);
@@ -54,19 +54,19 @@ public class PlayersScene implements Initializable {
         BoxArray.add(ChoiceBox6);
 
         for(int j=0; j<6; j++) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < choices.size(); i++) {
                 BoxArray.get(j).getItems().add(choices.get(i));
             }
-            BoxArray.get(j).setValue(choices.get(2));
+            BoxArray.get(j).setValue(choices.get(0));
         }
     }
 
     public void NextButtonClicked(){
-        Main.mainContainer.setScene(Main.PlayingSceneID);
+        Main.mainContainer.setScene(Main.PlayingSceneID, Main.window);
     }
 
     public void BackButtonClicked(){
-        Main.mainContainer.setScene(Main.NumberOfPlayersSceneID);
+        Main.mainContainer.setScene(Main.NumberOfPlayersSceneID, Main.window);
     }
 
     public void hideCheckBox(int number){

@@ -6,7 +6,7 @@ public class Player implements Serializable {
     protected String name;
     protected boolean isAI;
 
-    protected Player(String name)
+    public Player(String name)
     {
         this.name = name;
     }

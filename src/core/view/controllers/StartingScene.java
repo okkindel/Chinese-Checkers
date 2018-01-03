@@ -26,7 +26,7 @@ public class StartingScene implements Initializable {
 
     @FXML
     public void StartGameButtonHandler(){
-        Main.mainContainer.setScene(Main.ChoosingSceneID);
+        Main.mainContainer.setScene(Main.ChoosingSceneID, Main.window);
     }
 
     @FXML

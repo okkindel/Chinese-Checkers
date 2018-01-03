@@ -1,5 +1,6 @@
 package Sample;
 
+import core.view.Menu;
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -56,7 +57,7 @@ public class Main extends Application {
         mainContainer.loadScreen(Main.NumberOfPlayersSceneID, Main.NumberOfPlayersSceneFile);
 
 
-        mainContainer.setScene(Main.StartingSceneID);
+        mainContainer.setScene(Main.StartingSceneID, window);
 
     }
 

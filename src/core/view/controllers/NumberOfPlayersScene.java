@@ -25,7 +25,7 @@ public class NumberOfPlayersScene implements Initializable {
     }
 
     public void BackButtonClicked() {
-        Main.mainContainer.setScene(Main.ChoosingSceneID);
+        Main.mainContainer.setScene(Main.ChoosingSceneID, Main.window);
     }
 
     private void getChoice(ChoiceBox<Integer> choiceBox){
@@ -40,7 +40,7 @@ public class NumberOfPlayersScene implements Initializable {
         }else if(choice == 2){
             hidePlayers(2,6);
         }
-        Main.mainContainer.setScene(Main.PlayersSceneID);
+        Main.mainContainer.setScene(Main.PlayersSceneID, Main.window);
     }
 
     private void hidePlayers(int visibleNumberOfPlayers, int allPlayers){

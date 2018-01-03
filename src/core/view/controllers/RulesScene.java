@@ -25,6 +25,6 @@ public class RulesScene implements Initializable {
 
     @FXML
     public void BackButtonClicked(){
-        Main.mainContainer.setScene(Main.ChoosingSceneID);
+        Main.mainContainer.setScene(Main.ChoosingSceneID, Main.window);
     }
 }

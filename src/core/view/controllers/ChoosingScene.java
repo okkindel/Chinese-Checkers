@@ -17,17 +17,17 @@ public class ChoosingScene implements Initializable {
 
     @FXML
     public void PlayButtonClicked() throws IOException {
-        Main.mainContainer.setScene(Main.NumberOfPlayersSceneID);
+        Main.mainContainer.setScene(Main.NumberOfPlayersSceneID, Main.window);
     }
 
     @FXML
     public void RulesButtonClicked(){
-        Main.mainContainer.setScene(Main.RulesSceneID);
+        Main.mainContainer.setScene(Main.RulesSceneID, Main.window);
     }
 
     @FXML
     public void ReturnButtonClicked(){
-        Main.mainContainer.setScene(Main.StartingSceneID);
+        Main.mainContainer.setScene(Main.StartingSceneID, Main.window);
     }
 
 

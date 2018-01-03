@@ -4,6 +4,7 @@ import Sample.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 
@@ -15,7 +16,6 @@ public class MyScene {
     //Add the scene to the collection
     public void addScene(String name, Scene scene){
         scenes.put(name,scene);
-
     }
 
     //returns the Scene with the appropriate name
@@ -40,12 +40,12 @@ public class MyScene {
 
 
     //This method tries to display the screen with a predefined name.
-    public boolean setScene(String name){
+    public boolean setScene(String name, Stage stage){
         if(scenes.get(name) != null){ //scene loaded
             //TODO: make opacity etc
-            Main.window.setScene(scenes.get(name));
-            Main.window.centerOnScreen();
-            Main.window.show();
+            stage.setScene(scenes.get(name));
+            stage.centerOnScreen();
+            stage.show();
             return true;
         }else {
             System.out.println("scene hasn't been loaded!!! \n");

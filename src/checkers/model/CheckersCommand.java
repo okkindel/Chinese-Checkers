@@ -13,7 +13,7 @@ public class CheckersCommand {
     //the piece to move
     private CheckersBoard board;
 
-    protected CheckersCommand(CheckersBoard board, CheckersTile previousTile, CheckersTile destinationTile)
+    public CheckersCommand(CheckersBoard board, CheckersTile previousTile, CheckersTile destinationTile)
     {
         //set the fields to the parameters given
         this.board = board;

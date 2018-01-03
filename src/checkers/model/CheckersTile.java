@@ -9,13 +9,13 @@ public class CheckersTile extends Tile {
     private boolean schedule;
     private int x, y;
 
-    CheckersTile (boolean schedule, int x, int y) {
+    public CheckersTile(boolean schedule, int x, int y) {
         this.schedule = schedule;
         this.x = x;
         this.y = y;
     }
 
-    boolean getAccessible() {
+    public boolean getAccessible() {
         return schedule;
     }
 
@@ -23,9 +23,15 @@ public class CheckersTile extends Tile {
         //null if not
         return piece;
     }
-    public int getX() {return x;}
-    public int getY() {return y;}
-    protected void setPiece(CheckersPiece piece)
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setPiece(CheckersPiece piece)
     {
         this.piece = piece;
     }

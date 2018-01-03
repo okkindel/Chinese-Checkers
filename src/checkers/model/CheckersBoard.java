@@ -48,12 +48,12 @@ public class CheckersBoard extends Board {
             }
         }
 
-        setupPlayers();
+        //setupPlayers();
         rules.add(new MoveRule());
 
-        if (!getPlayers().get(0).isAI()) {
-            nextPlayer();
-        }
+        //if (!getPlayers().get(0).isAI()) {
+        //    nextPlayer();
+        //}
     }
 
     public CheckersTile[][] getTiles() {
