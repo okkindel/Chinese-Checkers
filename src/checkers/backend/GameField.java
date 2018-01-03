@@ -7,7 +7,7 @@ import kernel.backend.AbstractField;
  */
 public class GameField extends AbstractField {
 
-    boolean available_getter() {
+    public boolean available_getter() {
         return available;
     }
 

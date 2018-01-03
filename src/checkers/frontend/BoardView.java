@@ -101,6 +101,10 @@ public class BoardView extends AbstractView implements Observer {
                     }
                     graphics.drawImage(players_pawn_image, width, height, null);
                 }
+                else if (board.getTiles()[x][y].available_getter()) {
+                    players_pawn_image = (BufferedImage) AssetsLoader.load("src/assets/area_checked.png", "image");
+                    graphics.drawImage(players_pawn_image, width, height, null);
+                }
                 width += pawn_width;
             }
             height += pawn_height;
