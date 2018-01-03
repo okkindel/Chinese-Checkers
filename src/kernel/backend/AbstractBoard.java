@@ -144,11 +144,11 @@ public abstract class AbstractBoard extends Observable implements Serializable {
                 //outbound message
                 out.println(msg_out);
                 String clientGame = null;
-                while (clientGame == null) { //get the gametype of the server
+                while (clientGame == null) {
                     clientGame = in.readLine();
                 }
-                out_msg_setter(null); //if we get here the gametype is the same so we want to reset outbound message for it's true purpose of passing moves
-
+                //true purpose of passing moves
+                out_msg_setter(null);
                 while (!gameFinished) {
                     while (Objects.equals(outbound, lastOutbound)) {
                         outbound = msg_out;
@@ -158,8 +158,10 @@ public abstract class AbstractBoard extends Observable implements Serializable {
                     lastOutbound = outbound;
                     //and send the message to the client
                     out.println(outbound);
-                    while (Objects.equals(inbound, lastInbound)) { //while the inbound message is the same as the last one we received
-                        inbound = in.readLine(); //get the message from the client
+                    //while message is same
+                    while (Objects.equals(inbound, lastInbound)) {
+                        //get the message
+                        inbound = in.readLine();
                         Thread.sleep(500);
                     }
                     //set the message in AbstractBoard so it can be parsed
@@ -201,36 +203,42 @@ public abstract class AbstractBoard extends Observable implements Serializable {
             }
             connect_setter();
 
-            String inbound = null; //setup placeholder variables so we can check the value of the incoming and outgoing messages
+            //check value of incoming and outgoing messages
+            String inbound = null;
             String lastInbound = null;
             String outbound = null;
             String lastOutbound = null;
 
-            out.println(msg_out); //sends the outbound message from the board, which at this point should denote the gametype of this checkers
+            //sends the outbound message from the board
+            out.println(msg_out);
             String serverGame = null;
-            while (serverGame == null) { //get the gametype of the server
+            while (serverGame == null) {
                 try {
                     serverGame = in.readLine();
                 } catch (IOException e) {
-                    show_message("err-" + "Connection lost!"); //account for the possibility of the server closing before we can get the gametype
+                    show_message("err-" + "Connection lost!");
                 }
             }
-            out_msg_setter(null); //if we get here the gametype is the same so we want to reset outbound message for it's true purpose of passing moves
+            //want to reset outbound message for it's true purpose of passing moves
+            out_msg_setter(null);
 
             try {
-                while (!gameFinished) { //until the checkers ends, we want to keep broadcasting and receiving depending on whose turn it is
-
-                    while (Objects.equals(inbound, lastInbound)) { //because we are the client, we receive first
+                //keep broadcasting and receiving
+                while (!gameFinished) {
+                    //we receive first
+                    while (Objects.equals(inbound, lastInbound)) {
                         inbound = in.readLine();
-                        Thread.sleep(500); //break up the checks by waiting three seconds, so that we aren't constantly checking
+                        Thread.sleep(500);
                     }
-                    in_msg_setter(inbound); //now that the inbound message is a new one, we set it in the board so we can then parse it to create a move
-                    lastInbound = inbound; //also set the placeholder value for next time we're the client
-                    while (Objects.equals(outbound, lastOutbound)) { //this should be true until we have made a move
+                    // we can then parse it to create a move
+                    in_msg_setter(inbound);
+                    lastInbound = inbound;
+                    //true until we have made a move
+                    while (Objects.equals(outbound, lastOutbound)) {
                         outbound = msg_out;
-                        Thread.sleep(500); //wait so that we aren't constantly assigning the same variable
+                        Thread.sleep(500);
                     }
-                    lastOutbound = outbound; //set the placeholder for next time we're the server
+                    lastOutbound = outbound;
                     //send the move to the server
                     out.println(outbound);
                 }
