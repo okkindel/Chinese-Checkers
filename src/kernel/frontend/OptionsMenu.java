@@ -112,7 +112,7 @@ class OptionsMenu extends AbstractView {
         playerSixNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerSixNameTextField = new JFormattedTextField();
         playerSixNameTextField.setColumns(10);
-        window.add(main_panel, BorderLayout.NORTH);
+        window.add(main_panel, BorderLayout.CENTER);
         window.add(not_main_panel, BorderLayout.SOUTH);
 
         main_panel.add(playerOneOptionsLabel);
@@ -149,7 +149,10 @@ class OptionsMenu extends AbstractView {
         not_main_panel.add(new JLabel());
         not_main_panel.add(new JLabel());
         not_main_panel.add(close);
-
+        main_panel.setBackground(new Color(30, 0, 0));
+        not_main_panel.setBackground(new Color(30, 0, 0));
+        save.setBackground(new Color(80, 0, 0));
+        close.setBackground(new Color(80, 0, 0));
         main_panel.setLayout(new GridLayout(3, 2, 10, 20));
 
         try {
