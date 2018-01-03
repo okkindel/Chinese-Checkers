@@ -57,16 +57,16 @@ public abstract class AbstractBoard extends Observable implements Serializable {
             next = 0;
         }
         activePlayer = player_list.get(next);
-        show_message("msg-" + activePlayer.getName() + "'s turn"); //show that the active player has changed, and the name of the new player
+        //name of the new player
+        show_message("msg-" + activePlayer.getName() + "'s turn");
         show_message("turnChange");
     }
 
     /**
-     * Relays a message from objects outside of this class to the observers of this class. In particular used by Robot to relay the messages it has to show the player.
-     * <p>
-     * The benefits of this method are twofold: setChanged is protected, so it would have to be overridden in this class. As well as this it condenses Robot having to call both setChanged and notifyObservers, since instead they only need one call to this method.
+     * Relays a message
+     * Observer.
      *
-     * @param message The message to be relayed to the observers of this class
+     * @param message The message.
      */
     protected void show_message(String message) {
         setChanged();
@@ -82,7 +82,7 @@ public abstract class AbstractBoard extends Observable implements Serializable {
     }
 
     /**
-     * New thread, new instance of the server.
+     * New thread, new instance of the client.
      */
     public void runClient(String IP, String port) {
         ip = IP;
@@ -100,9 +100,8 @@ public abstract class AbstractBoard extends Observable implements Serializable {
     }
 
     /**
-     * Net Play Server, this runs alongside the main checkers once started, broadcasting to and receiving moves from the server on the other side.
-     * <p>
-     * Runs in it's own thread, and relies on some of the variables contained in AbstractBoard to function
+     * Server, this runs, broadcasting to and receiving moves from the server.
+     * Runs thread.
      */
     private class Server implements Runnable {
 
@@ -171,9 +170,8 @@ public abstract class AbstractBoard extends Observable implements Serializable {
     }
 
     /**
-     * Net Play Client, this runs alongside the main checkers once started, broadcasting to and receiving moves from the server on the other side.
-     * <p>
-     * Runs in it's own thread, and relies on some of the variables contained in AbstractBoard to function
+     * Server Client, this runs, broadcasting to and receiving moves from the server.
+     * Own thread.
      */
     private class Client implements Runnable {
 
@@ -257,7 +255,7 @@ public abstract class AbstractBoard extends Observable implements Serializable {
         this.msg_in = inbound;
     }
 
-    public void out_msg_setter(String msg_out) {
+    protected void out_msg_setter(String msg_out) {
         this.msg_out = msg_out;
     }
 
