@@ -4,9 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.Properties;
 
 /**
  * Options menu for checkers.
@@ -34,7 +33,7 @@ class OptionsMenu extends AbstractView {
         close = new JButton("Close");
         close.addActionListener(new Close());
         save.addActionListener(new Save());
-        AssetsLoader.loadProperties();
+        AssetsLoader.loadConfiguration();
         drawOptions();
     }
 
@@ -174,14 +173,14 @@ class OptionsMenu extends AbstractView {
             playerFourTypeComboBox.setSelectedIndex(Integer.parseInt(System.getProperty("checkers.playerFour.type")));
             playerFiveTypeComboBox.setSelectedIndex(Integer.parseInt(System.getProperty("checkers.playerFive.type")));
             playerSixTypeComboBox.setSelectedIndex(Integer.parseInt(System.getProperty("checkers.playerSix.type")));
-        } catch (Exception ignore) { /*none*/ }
 
-        playerOneNameTextField.setText(System.getProperty("playerOne.name"));
-        playerTwoNameTextField.setText(System.getProperty("playerTwo.name"));
-        playerThreeNameTextField.setText(System.getProperty("playerThree.name"));
-        playerFourNameTextField.setText(System.getProperty("playerFour.name"));
-        playerFiveNameTextField.setText(System.getProperty("playerFive.name"));
-        playerSixNameTextField.setText(System.getProperty("playerSix.name"));
+            playerOneNameTextField.setText(System.getProperty("playerOne.name"));
+            playerTwoNameTextField.setText(System.getProperty("playerTwo.name"));
+            playerThreeNameTextField.setText(System.getProperty("playerThree.name"));
+            playerFourNameTextField.setText(System.getProperty("playerFour.name"));
+            playerFiveNameTextField.setText(System.getProperty("playerFive.name"));
+            playerSixNameTextField.setText(System.getProperty("playerSix.name"));
+        } catch (Exception ignore) { /*none*/ }
 
         window.setSize(new Dimension(1000, 225));
         window.setLocationRelativeTo(null);
@@ -205,24 +204,24 @@ class OptionsMenu extends AbstractView {
     private class Save implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.setProperty("playerOne.name", playerOneNameTextField.getText());
-            System.setProperty("playerTwo.name", playerTwoNameTextField.getText());
-            System.setProperty("playerThree.name", playerThreeNameTextField.getText());
-            System.setProperty("playerFour.name", playerFourNameTextField.getText());
-            System.setProperty("playerFive.name", playerFiveNameTextField.getText());
-            System.setProperty("playerSix.name", playerSixNameTextField.getText());
-            System.setProperty("checkers.playerOne.type", playerOneTypeComboBox.getSelectedIndex() + "");
-            System.setProperty("checkers.playerTwo.type", playerTwoTypeComboBox.getSelectedIndex() + "");
-            System.setProperty("checkers.playerThree.type", playerThreeTypeComboBox.getSelectedIndex() + "");
-            System.setProperty("checkers.playerFour.type", playerFourTypeComboBox.getSelectedIndex() + "");
-            System.setProperty("checkers.playerFive.type", playerFiveTypeComboBox.getSelectedIndex() + "");
-            System.setProperty("checkers.playerSix.type", playerSixTypeComboBox.getSelectedIndex() + "");
+            Properties properties = new Properties();
+            properties.setProperty("playerOne.name", playerOneNameTextField.getText());
+            properties.setProperty("playerTwo.name", playerTwoNameTextField.getText());
+            properties.setProperty("playerThree.name", playerThreeNameTextField.getText());
+            properties.setProperty("playerFour.name", playerFourNameTextField.getText());
+            properties.setProperty("playerFive.name", playerFiveNameTextField.getText());
+            properties.setProperty("playerSix.name", playerSixNameTextField.getText());
+            properties.setProperty("checkers.playerOne.type", playerOneTypeComboBox.getSelectedIndex() + "");
+            properties.setProperty("checkers.playerTwo.type", playerTwoTypeComboBox.getSelectedIndex() + "");
+            properties.setProperty("checkers.playerThree.type", playerThreeTypeComboBox.getSelectedIndex() + "");
+            properties.setProperty("checkers.playerFour.type", playerFourTypeComboBox.getSelectedIndex() + "");
+            properties.setProperty("checkers.playerFive.type", playerFiveTypeComboBox.getSelectedIndex() + "");
+            properties.setProperty("checkers.playerSix.type", playerSixTypeComboBox.getSelectedIndex() + "");
             File optionsFile = (File) AssetsLoader.load("src/assets/options.json", "textFile");
-            FileWriter writer;
             try {
-                writer = new FileWriter(optionsFile);
-                System.getProperties().store(writer, "GameSave");
-                writer.close();
+                OutputStream outputStream = new FileOutputStream(optionsFile);
+                properties.store(outputStream, null);
+                outputStream.close();
             } catch (IOException ex) {
                 displayError("problems saving");
             }

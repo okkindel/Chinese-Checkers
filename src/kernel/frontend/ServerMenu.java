@@ -20,7 +20,7 @@ class ServerMenu extends AbstractView {
         join_server = new JButton("Join Server");
         make_server.addActionListener(new ServerHost());
         join_server.addActionListener(new JoinGame());
-        AssetsLoader.loadProperties();
+        AssetsLoader.loadConfiguration();
         paintMenu();
     }
 

@@ -30,7 +30,7 @@ public class GameMenu extends AbstractView {
         online.addActionListener(new OnlineGame());
         options.addActionListener(new Options());
         exit.addActionListener(new ExitGame());
-        AssetsLoader.loadProperties();
+        AssetsLoader.loadConfiguration();
         paint();
     }
 

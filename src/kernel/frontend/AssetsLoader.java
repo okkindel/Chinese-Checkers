@@ -121,31 +121,23 @@ public class AssetsLoader {
     /**
      * Loading options.
      */
-    static void loadProperties() {
+    static void loadConfiguration() {
+
+        FileInputStream fileInputStream;
         try {
-            FileInputStream fileInputStream;
-            try {
-                fileInputStream = new FileInputStream("src/assets/options.json");
-            } catch (FileNotFoundException error) {
-                AbstractView.displayError("There is no options file! \n" +
-                        "Enter options and click Save...");
-                return;
-            }
-            Properties options = new Properties(System.getProperties());
-            try {
-                options.load(fileInputStream);
-            } catch (IOException error) {
-                AbstractView.displayError("Problem loading in the options file!");
-                return;
-            }
-            System.setProperties(options);
-        } catch (StackOverflowError error) {
-            Path optionsFile = Paths.get("src/assets/options.json");
-            try {
-                Files.delete(optionsFile);
-            } catch (IOException ignore) {
-                AbstractView.displayError("An error of an error occurred.");
-            }
+            fileInputStream = new FileInputStream("src/assets/options.json");
+        } catch (FileNotFoundException error) {
+            AbstractView.displayError("There is no options file! \n" +
+                    "Enter options and click Save...");
+            return;
         }
+        Properties options = new Properties(System.getProperties());
+        try {
+            options.load(fileInputStream);
+        } catch (IOException error) {
+            AbstractView.displayError("Problem loading in the options file!");
+            return;
+        }
+        System.setProperties(options);
     }
 }
