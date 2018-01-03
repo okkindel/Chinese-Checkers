@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Properties;
 import javax.imageio.ImageIO;
@@ -76,8 +79,7 @@ public class AssetsLoader {
     /**
      * Load Image.
      */
-    private class LoadImage implements Load
-    {
+    private class LoadImage implements Load {
 
         @Override
         public void load(String id) {
@@ -90,6 +92,7 @@ public class AssetsLoader {
             resources.put(id, image);
         }
     }
+
     /**
      * Load Icon.
      */
@@ -119,21 +122,30 @@ public class AssetsLoader {
      * Loading options.
      */
     static void loadProperties() {
-        FileInputStream fileInputStream;
         try {
-            fileInputStream = new FileInputStream("src/assets/options.json");
-        } catch (FileNotFoundException e) {
-            AbstractView.displayError("There is no options file! \n" +
-                    "Enter options and click Save...");
-            return;
+            FileInputStream fileInputStream;
+            try {
+                fileInputStream = new FileInputStream("src/assets/options.json");
+            } catch (FileNotFoundException error) {
+                AbstractView.displayError("There is no options file! \n" +
+                        "Enter options and click Save...");
+                return;
+            }
+            Properties options = new Properties(System.getProperties());
+            try {
+                options.load(fileInputStream);
+            } catch (IOException error) {
+                AbstractView.displayError("Problem loading in the options file!");
+                return;
+            }
+            System.setProperties(options);
+        } catch (StackOverflowError error) {
+            Path optionsFile = Paths.get("src/assets/options.json");
+            try {
+                Files.delete(optionsFile);
+            } catch (IOException ignore) {
+                AbstractView.displayError("An error of an error occurred.");
+            }
         }
-        Properties options = new Properties(System.getProperties());
-        try {
-            options.load(fileInputStream);
-        } catch (IOException e) {
-            AbstractView.displayError("Problem loading in the options file!");
-            return;
-        }
-        System.setProperties(options);
     }
 }
