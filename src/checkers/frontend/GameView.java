@@ -95,7 +95,7 @@ public class GameView extends AbstractView {
             undo.addActionListener(new Undo());
             menu.add(undo);
         }
-        JMenuItem hint = new JMenuItem("Show all moves");
+        JMenuItem hint = new JMenuItem("Show All Moves");
         hint.addActionListener(new Moves());
         menu.add(hint);
         JMenuItem quit = new JMenuItem("Exit");

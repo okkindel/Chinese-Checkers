@@ -224,7 +224,7 @@ class OptionsMenu extends AbstractView {
                 properties.store(outputStream, null);
                 outputStream.close();
             } catch (IOException ex) {
-                displayError("problems saving");
+                displayError("Problems saving.");
             }
             window.setVisible(false);
         }

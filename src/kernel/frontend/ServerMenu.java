@@ -21,13 +21,13 @@ class ServerMenu extends AbstractView {
         make_server.addActionListener(new ServerHost());
         join_server.addActionListener(new JoinGame());
         AssetsLoader.loadConfiguration();
-        paintMenu();
+        paintOptions();
     }
 
     /**
      * Draws the options of Online Game.
      */
-    private void paintMenu() {
+    private void paintOptions() {
 
         super.paint();
 
@@ -60,16 +60,24 @@ class ServerMenu extends AbstractView {
     /**
      * Draws a gif screen
      */
-    private void drawLoadingScreen() {
+    private void waitingRoom() {
 
         window.setVisible(false);
         super.paint();
-        main_panel.add(new JLabel("Please wait..."));
-        JLabel picLabel = new JLabel();
-        main_panel.setBackground(new Color(40, 0, 0));
-        main_panel.add(picLabel);
+        JLabel text = new JLabel("Please wait...");
+        text.setForeground(Color.WHITE);
+        main_panel.add(text);
+        ImageIcon loading = (ImageIcon) AssetsLoader.load("src/assets/loading.gif", "imageIcon");
+        JLabel label = new JLabel();
+        label.setIcon(loading);
+        not_main_panel.add(label);
         window.add(main_panel);
-        window.setSize(new Dimension(550, 70));
+        window.add(not_main_panel);
+        main_panel.setBackground(new Color(40, 0, 0));
+        not_main_panel.setBackground(new Color(40, 0, 0));
+        window.add(main_panel, BorderLayout.CENTER);
+        window.add(not_main_panel, BorderLayout.SOUTH);
+        window.setSize(new Dimension(550, 100));
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
@@ -100,7 +108,7 @@ class ServerMenu extends AbstractView {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            drawLoadingScreen();
+            waitingRoom();
             SwingWorker<?, ?> worker = new SwingWorker<Void, Void>() {
                 @Override
                 protected Void doInBackground() throws InterruptedException {
