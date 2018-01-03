@@ -45,76 +45,88 @@ class OptionsMenu extends AbstractView {
 
         String[] playerOptions = {"Human", "AI", "Off"};
 
-        JLabel playerOneOptionsLabel = new JLabel("Participant One");
+        JLabel playerOneOptionsLabel = new JLabel("Participant One:");
+        playerOneOptionsLabel.setForeground(new Color(65, 52, 52));
         playerOneOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerOneOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
         playerOneTypeComboBox = new JComboBox<>(playerOptions);
         playerOneTypeComboBox.setSelectedIndex(0);
 
-        JLabel playerOneNameLabel = new JLabel("Name");
+        JLabel playerOneNameLabel = new JLabel("Name:");
+        playerOneNameLabel.setForeground(new Color(65, 52, 52));
         playerOneNameLabel.setVerticalAlignment(JLabel.CENTER);
         playerOneNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerOneNameTextField = new JFormattedTextField();
         playerOneNameTextField.setColumns(10);
 
-        JLabel playerTwoOptionsLabel = new JLabel("Participant Two");
+        JLabel playerTwoOptionsLabel = new JLabel("Participant Two:");
+        playerTwoOptionsLabel.setForeground(new Color(65, 52, 52));
         playerTwoOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerTwoOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
         playerTwoTypeComboBox = new JComboBox<>(playerOptions);
         playerTwoTypeComboBox.setSelectedIndex(1);
 
-        JLabel playerTwoNameLabel = new JLabel("Name");
+        JLabel playerTwoNameLabel = new JLabel("Name:");
+        playerTwoNameLabel.setForeground(new Color(65, 52, 52));
         playerTwoNameLabel.setVerticalAlignment(JLabel.CENTER);
         playerTwoNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerTwoNameTextField = new JFormattedTextField();
         playerTwoNameTextField.setColumns(10);
 
-        JLabel playerThreeOptionsLabel = new JLabel("Participant Three");
+        JLabel playerThreeOptionsLabel = new JLabel("Participant Three:");
+        playerThreeOptionsLabel.setForeground(new Color(65, 52, 52));
         playerThreeOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerThreeOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
         playerThreeTypeComboBox = new JComboBox<>(playerOptions);
 
-        JLabel playerThreeNameLabel = new JLabel("Name");
+        JLabel playerThreeNameLabel = new JLabel("Name:");
+        playerThreeNameLabel.setForeground(new Color(65, 52, 52));
         playerThreeNameLabel.setVerticalAlignment(JLabel.CENTER);
         playerThreeNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerThreeNameTextField = new JFormattedTextField();
         playerThreeNameTextField.setColumns(10);
 
-        JLabel playerFourOptionsLabel = new JLabel("Participant Four");
+        JLabel playerFourOptionsLabel = new JLabel("Participant Four:");
+        playerFourOptionsLabel.setForeground(new Color(65, 52, 52));
         playerFourOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerFourOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
         playerFourTypeComboBox = new JComboBox<>(playerOptions);
 
-        JLabel playerFourNameLabel = new JLabel("Name");
+        JLabel playerFourNameLabel = new JLabel("Name:");
+        playerFourNameLabel.setForeground(new Color(65, 52, 52));
         playerFourNameLabel.setVerticalAlignment(JLabel.CENTER);
         playerFourNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerFourNameTextField = new JFormattedTextField();
         playerFourNameTextField.setColumns(10);
 
-        JLabel playerFiveOptionsLabel = new JLabel("Participant Five");
+        JLabel playerFiveOptionsLabel = new JLabel("Participant Five:");
+        playerFiveOptionsLabel.setForeground(new Color(65, 52, 52));
         playerFiveOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerFiveOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
         playerFiveTypeComboBox = new JComboBox<>(playerOptions);
 
-        JLabel playerFiveNameLabel = new JLabel("Name");
+        JLabel playerFiveNameLabel = new JLabel("Name:");
+        playerFiveNameLabel.setForeground(new Color(65, 52, 52));
         playerFiveNameLabel.setVerticalAlignment(JLabel.CENTER);
         playerFiveNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerFiveNameTextField = new JFormattedTextField();
         playerFiveNameTextField.setColumns(10);
 
-        JLabel playerSixOptionsLabel = new JLabel("Participant Six");
+        JLabel playerSixOptionsLabel = new JLabel("Participant Six:");
+        playerSixOptionsLabel.setForeground(new Color(65, 52, 52));
         playerSixOptionsLabel.setVerticalAlignment(JLabel.CENTER);
         playerSixOptionsLabel.setHorizontalAlignment(JLabel.CENTER);
         playerSixTypeComboBox = new JComboBox<>(playerOptions);
 
-        JLabel playerSixNameLabel = new JLabel("Name");
+        JLabel playerSixNameLabel = new JLabel("Name:");
+        playerSixNameLabel.setForeground(new Color(65, 52, 52));
         playerSixNameLabel.setVerticalAlignment(JLabel.CENTER);
         playerSixNameLabel.setHorizontalAlignment(JLabel.CENTER);
         playerSixNameTextField = new JFormattedTextField();
         playerSixNameTextField.setColumns(10);
+
         window.add(main_panel, BorderLayout.CENTER);
         window.add(not_main_panel, BorderLayout.SOUTH);
-
         main_panel.add(playerOneOptionsLabel);
         main_panel.add(playerOneTypeComboBox);
         main_panel.add(playerOneNameLabel);

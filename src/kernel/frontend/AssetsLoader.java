@@ -123,8 +123,8 @@ public class AssetsLoader {
         try {
             fileInputStream = new FileInputStream("src/assets/options.json");
         } catch (FileNotFoundException e) {
-            AbstractView.displayError("There is no: 'src/assets/options.json' \n" +
-                    "You have to enter options and click 'Save'!");
+            AbstractView.displayError("There is no options file! \n" +
+                    "Enter options and click Save...");
             return;
         }
         Properties options = new Properties(System.getProperties());

@@ -32,7 +32,9 @@ class ServerMenu extends AbstractView {
         super.paint();
 
         JLabel ip_label = new JLabel("IP:");
+        ip_label.setForeground(new Color(65, 52, 52));
         JLabel port_label = new JLabel("Port:");
+        port_label.setForeground(new Color(65, 52, 52));
         ip_field = new JFormattedTextField("127.0.0.1");
         port_field = new JFormattedTextField("4444");
         main_panel.add(ip_label);
