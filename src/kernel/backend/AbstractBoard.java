@@ -111,61 +111,70 @@ public abstract class AbstractBoard extends Observable implements Serializable {
             ServerSocket socket = null;
 
             try {
-                socket = new ServerSocket(4444); //default port for this has been chosen as 4444 since it's something that is not usually used
+                socket = new ServerSocket(4444);
             } catch (IOException e) {
-                show_message("err-" + "Couldn't listen on the port\nExiting..."); //this means we couldn't listen on the port, likely that something else is listening on that port
+                show_message("err-" + "Couldn't listen on the port\nExiting...");
                 System.exit(1);
             }
-            Socket clientSocket = null; //setup the socket for the client
+            //setup the socket for the client
+            Socket clientSocket = null;
             try {
-                clientSocket = socket.accept(); //then assign it by connecting to this server's socket
-            } catch (IOException e) { //if this fires, something indeterminate went wrong, could be a number of network problems
-                show_message("err-" + "Problem connecting to client/nDo they have a firewall blocking communication?");
+                //then assign it
+                clientSocket = socket.accept();
+            } catch (IOException e) {
+                show_message("err-" + "Problem connecting.");
                 System.exit(1);
             }
-            connect_setter(); //if we got here, we're is_connected, so we set this to get rid of the loading screen and start up the checkers
+            //we're connected, start up the checkers
+            connect_setter();
+            //setup PrintWriter so it can write messages
+            PrintWriter out;
 
-            PrintWriter out; //get the printWriter ready so it can write messages to the client
             try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true); //connect the printWriter
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //setup the BufferedReader to receive input from the client
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                //setup the BufferedReader to receive
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                String inbound = null; //setting up the placeholder variables so that we can check if messages sent and received are new or not
+                //variables - if messages sent and received are new or not
+                String inbound = null;
                 String lastInbound = null;
                 String outbound = null;
                 String lastOutbound = null;
 
-                out.println(msg_out); //sends the outbound message from the board, which at this point should denote the gametype of this checkers
+                //outbound message
+                out.println(msg_out);
                 String clientGame = null;
                 while (clientGame == null) { //get the gametype of the server
                     clientGame = in.readLine();
                 }
                 out_msg_setter(null); //if we get here the gametype is the same so we want to reset outbound message for it's true purpose of passing moves
 
-                while (!gameFinished) { //while the checkers is still running, we want to keep broadcasting and receiving
-                    while (Objects.equals(outbound, lastOutbound)) { //while the outbound message hasn't changed since we last received a different one
-                        outbound = msg_out; //we set it to the message from the board
-                        Thread.sleep(500); //and wait a few seconds so we aren't constantly assigning the same variable
+                while (!gameFinished) {
+                    while (Objects.equals(outbound, lastOutbound)) {
+                        outbound = msg_out;
+                        Thread.sleep(500);
                     }
-                    lastOutbound = outbound; //then we set the placeholder so we can check it next time we're sending a message
-                    out.println(outbound); //and send the message to the client, so that it can take a move from it
+                    //we can check it next time we're sending a message
+                    lastOutbound = outbound;
+                    //and send the message to the client
+                    out.println(outbound);
                     while (Objects.equals(inbound, lastInbound)) { //while the inbound message is the same as the last one we received
                         inbound = in.readLine(); //get the message from the client
-                        Thread.sleep(500); //and wait a few seconds so we aren't constantly polling the client
+                        Thread.sleep(500);
                     }
-                    in_msg_setter(inbound); //set the message in AbstractBoard so it can be parsed
-                    lastInbound = inbound; //and set the placeholder message so that we can check next time we receive a message
+                    //set the message in AbstractBoard so it can be parsed
+                    in_msg_setter(inbound);
+                    //we can check next time we receive a message
+                    lastInbound = inbound;
                 }
-                out.close(); //now the checkers is over, we have no reason for the following, so we close them all
+                out.close();
                 in.close();
                 clientSocket.close();
                 socket.close();
 
-            } catch (IOException e) { //if this fires we lost connection, so tell the user as such
+            } catch (IOException e) {
                 show_message("err-" + "Connection lost!");
-            } catch (InterruptedException e) {
-                show_message("err-" + "Something went wrong!\nLost connection!");//this should never fire, so we don't really have anything to tell the user if it does
-            }
+            } catch (Exception ignore) { /*none*/ }
         }
     }
 
@@ -222,15 +231,15 @@ public abstract class AbstractBoard extends Observable implements Serializable {
                         Thread.sleep(500); //wait so that we aren't constantly assigning the same variable
                     }
                     lastOutbound = outbound; //set the placeholder for next time we're the server
-                    out.println(outbound); //send the move to the server
+                    //send the move to the server
+                    out.println(outbound);
                 }
-                out.close(); //we don't need the connection any more, since the checkers is over, so we close everything to be responsible
+                out.close();
                 in.close();
                 socket.close();
             } catch (IOException e) {
                 show_message("err-" + "Connection lost!");
-            } catch (InterruptedException ignored) {
-            }
+            } catch (Exception ignore) { /*none */}
         }
     }
 

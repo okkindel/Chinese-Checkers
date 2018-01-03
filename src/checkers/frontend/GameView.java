@@ -80,7 +80,7 @@ public class GameView extends AbstractView {
     @Override
     public void paint() {
         super.paint();
-        boardView.setPreferredSize(new Dimension(700, 630));
+        boardView.setPreferredSize(new Dimension(700, 645));
         window.add(boardView);
         JMenuBar menuBar = new JMenuBar();
 

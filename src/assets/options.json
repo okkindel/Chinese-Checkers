@@ -1,5 +1,5 @@
 #GameSave
-#Wed Jan 03 16:07:07 CET 2018
+#Wed Jan 03 17:09:04 CET 2018
 java.runtime.name=OpenJDK Runtime Environment
 sun.boot.library.path=/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64
 java.vm.version=25.151-b12
@@ -12,7 +12,7 @@ file.encoding.pkg=sun.io
 user.country=PL
 sun.java.launcher=SUN_STANDARD
 sun.os.patch.level=unknown
-checkers.playerTwo.type=1
+checkers.playerTwo.type=0
 playerThree.name=
 java.vm.specification.name=Java Virtual Machine Specification
 user.dir=/home/okkindel/Desktop/Chinese-Checkers
@@ -24,7 +24,7 @@ os.arch=amd64
 java.io.tmpdir=/tmp
 line.separator=\n
 java.vm.specification.vendor=Oracle Corporation
-playerOne.name=
+playerOne.name=Blue
 os.name=Linux
 playerFive.name=
 sun.jnu.encoding=UTF-8
@@ -62,7 +62,7 @@ java.vendor.url.bug=http\://bugreport.sun.com/bugreport/
 sun.cpu.endian=little
 sun.io.unicode.encoding=UnicodeLittle
 sun.font.fontmanager=sun.awt.X11FontManager
-playerTwo.name=
+playerTwo.name=Red
 sun.desktop=gnome
 sun.cpu.isalist=
 checkers.playerFive.type=2

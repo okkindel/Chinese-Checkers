@@ -23,7 +23,7 @@ import kernel.frontend.AbstractView;
 public class BoardView extends AbstractView implements Observer {
 
     private int start_x = 174;
-    private int start_y = 85;
+    private int start_y = 100;
     private int pawn_height = 27;
     private int pawn_width = 27;
     private BufferedImage players_pawn_image;
