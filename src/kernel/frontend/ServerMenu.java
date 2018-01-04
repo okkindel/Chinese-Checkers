@@ -8,14 +8,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class ServerMenu extends AbstractView {
+public class ServerMenu extends AbstractView {
 
     private JButton make_server;
     private JButton join_server;
     private JFormattedTextField ip_field;
     private JFormattedTextField port_field;
 
-    ServerMenu() {
+    public ServerMenu() {
         make_server = new JButton("Host Server");
         join_server = new JButton("Join Server");
         make_server.addActionListener(new ServerHost());

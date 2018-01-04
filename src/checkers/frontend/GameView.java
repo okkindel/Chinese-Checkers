@@ -17,8 +17,8 @@ import kernel.frontend.AbstractView;
  */
 public class GameView extends AbstractView {
 
-    private BoardView boardView;
-    private GameBoard board;
+    public BoardView boardView;
+    public GameBoard board;
 
     /**
      * Where is not online game.

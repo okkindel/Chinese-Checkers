@@ -30,7 +30,7 @@ public class BoardView extends AbstractView implements Observer {
     private BufferedImage selected_image;
     private BufferedImage available_move;
     private GameField tile_selected;
-    private GameBoard board;
+    public GameBoard board;
 
     GameBoard getBoard() {
         return board;
@@ -39,7 +39,7 @@ public class BoardView extends AbstractView implements Observer {
     /**
      * Constructor
      */
-    BoardView(GameBoard board) {
+    public BoardView(GameBoard board) {
         this.board = board;
         wallpaper = (BufferedImage) AssetsLoader.load("src/assets/board.png", "image");
         selected_image = (BufferedImage) AssetsLoader.load("src/assets/pawn_selected.png", "image");
@@ -171,7 +171,7 @@ public class BoardView extends AbstractView implements Observer {
      * @param pos_x The x position.
      * @param pos_y The y position.
      */
-    private void drawSelected(int pos_x, int pos_y) {
+    protected void drawSelected(int pos_x, int pos_y) {
 
         try {
             if (board.getTiles()[pos_x][pos_y].getPawn().getOwner() != board.active_player_getter()) {

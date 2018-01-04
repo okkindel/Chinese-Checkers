@@ -33,7 +33,7 @@ public abstract class AbstractBoard extends Observable implements Serializable {
     //the rulezz for each checkers, used of this class
     protected List<RuleInterface> set_of_rulez;
     protected Executor executor;
-    protected Participant activePlayer;
+    public Participant activePlayer;
     protected boolean gameFinished;
 
     /**

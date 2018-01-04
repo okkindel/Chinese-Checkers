@@ -31,6 +31,7 @@ public class GameMenu extends AbstractView {
         options.addActionListener(new Options());
         exit.addActionListener(new ExitGame());
         paint();
+
     }
 
 

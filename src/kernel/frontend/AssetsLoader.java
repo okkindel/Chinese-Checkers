@@ -118,7 +118,7 @@ public class AssetsLoader {
     /**
      * Loading options.
      */
-    static void loadConfiguration() {
+    public static void loadConfiguration() {
 
         FileInputStream fileInputStream;
         try {
