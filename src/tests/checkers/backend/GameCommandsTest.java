@@ -3,7 +3,6 @@ package checkers.backend;
 import checkers.frontend.GameView;
 import kernel.frontend.GameMenu;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class GameCommandsTest {
