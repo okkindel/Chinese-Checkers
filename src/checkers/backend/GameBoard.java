@@ -328,7 +328,7 @@ public class GameBoard extends AbstractBoard {
 
 
 
-    public ArrayList<GameField[]> findMoves(GameField start, ArrayList<GameField[]> foundMoves) {
+    private ArrayList<GameField[]> findMoves(GameField start, ArrayList<GameField[]> foundMoves) {
 
         int position_x;
         int position_y = start.getY();

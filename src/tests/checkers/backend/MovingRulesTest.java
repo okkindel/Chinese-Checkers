@@ -1,7 +1,6 @@
 package checkers.backend;
 
 import kernel.backend.AbstractBoard;
-import kernel.backend.Participant;
 import kernel.backend.UndoInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,16 +31,6 @@ public class MovingRulesTest {
         aboard = mock(GameBoard.class);
         commands = mock(GameCommands.class);
         assertEquals(false, rules.checkValid(aboard, commands));
-
-
-//        Participant owner = mock(Participant.class);
-//
-//        GameBoard gameBoard = (GameBoard) board;
-//        gameBoard.getTiles()[6][3].pawn_setter(new GamePawn(owner));
-
-
-
-
     }
 
 }
