@@ -1,6 +1,9 @@
 package checkers.backend;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import kernel.backend.Robot;
 import kernel.backend.AbstractBoard;
@@ -261,8 +264,24 @@ public class GameBoard extends AbstractBoard {
                 //we've found an empty tile for the piece to move to
                 if (getTiles()[position_x + xOffset][position_y + yOffset].getPawn() == null
                         && getTiles()[position_x + xOffset][position_y + yOffset].available_getter()) {
-                    GameField[] move = {start, getTiles()[position_x + xOffset][position_y + yOffset]};
-                    foundMoves.add(move);
+
+
+
+                    /////checking if possible move exists in array
+                    boolean check = true;
+                    for(GameField[] g: foundMoves){
+                        if((g[1].getX() == getTiles()[position_x + xOffset][position_y + yOffset].getX() &&
+                                g[1].getY() == getTiles()[position_x + xOffset][position_y + yOffset].getY())){
+                                check = false;
+                                break;
+                        }
+                    }
+                    if(check){
+                        GameField[] move = {start, getTiles()[position_x + xOffset][position_y + yOffset]};
+                        foundMoves.add(move);
+                    }
+                    /////end of checking
+
                     //there should be pieces we can jump over, and still be in bounds
                     //we need to modify the position_x accordingly to jumping over pieces and the change
                 } else if (!(position_x + xOffset * 2 < 0 || position_y + yOffset * 2 < 0 ||
@@ -280,12 +299,110 @@ public class GameBoard extends AbstractBoard {
                         //if accessible cell
                         boolean accessible = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].available_getter());
                         if (emptyDestination && accessible) {
+
                             foundMoves.add(new GameField[]{start, getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)]});
+                            foundMoves.addAll(findMoves(foundMoves.get(foundMoves.size()-1)[1], foundMoves));
+
+                            for (int i = 0; i < foundMoves.size(); i++) {
+                                for (int j = i+1; j < foundMoves.size(); j++) {
+                                    // compare list.get(i) and list.get(j)
+                                    if(foundMoves.get(i)[1].getX()==foundMoves.get(j)[1].getX()&&
+                                            foundMoves.get(i)[1].getY()==foundMoves.get(j)[1].getY()){
+                                        foundMoves.remove(j);
+                                    }
+                                }
+                            }
                         }
                     } catch (Exception ignore) { /*nothing here*/}
                 }
             }
         }
+
+        System.out.println(foundMoves.size());
+        //foundMoves.remove(foundMoves.get(foundMoves.size()-1));
+        //findMoves(foundMoves.get(0)[0]).get(0));
+
+        return foundMoves;
+    }
+
+
+
+
+    public ArrayList<GameField[]> findMoves(GameField start, ArrayList<GameField[]> foundMoves) {
+
+        int position_x;
+        int position_y = start.getY();
+        boolean cont = false;
+
+        for (int xOffset = -1; xOffset < 2; xOffset++) {
+            cont = false;
+            for (int yOffset = -1; yOffset < 2; yOffset++) {
+                position_x = start.getX();
+                boolean out_of_board = (position_x + xOffset < 0 || position_y + yOffset < 0
+                        || position_x + xOffset > 12 || position_y + yOffset > 16);
+
+
+                boolean shifted_row = (!(position_y % 2 == 0));
+                //if we are in a shifted row, no access to top left and bottom left cells.
+                boolean modify_when_shifted = (position_y + yOffset != position_y && (position_x + xOffset) == position_x - 1);
+                boolean non_modify_shift = (position_y + yOffset != position_y && (position_x + xOffset) == position_x + 1);
+
+                //if true, we should ignore that cell
+                if (out_of_board || (shifted_row && modify_when_shifted) || (!shifted_row && non_modify_shift)) {
+                    continue;
+                }
+
+                //we've found an empty tile for the piece to move to
+                if (getTiles()[position_x + xOffset][position_y + yOffset].getPawn() == null
+                        && getTiles()[position_x + xOffset][position_y + yOffset].available_getter()) {
+                    GameField[] move = {start, getTiles()[position_x + xOffset][position_y + yOffset]};
+                    //foundMoves.add(move);
+                    //there should be pieces we can jump over, and still be in bounds
+                    //we need to modify the position_x accordingly to jumping over pieces and the change
+                } else if (!(position_x + xOffset * 2 < 0 || position_y + yOffset * 2 < 0 ||
+                        position_x + xOffset * 2 > 12 || position_y + yOffset * 2 > 16)) {
+                    if (shifted_row && !((position_y + yOffset * 2) == position_y)) {
+                        position_x -= 1;
+                    } else if (yOffset != 0) {
+                        position_x += 1;
+                    }
+
+                    //if space is free to jump
+                    try {
+                        boolean emptyDestination = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].getPawn() == null);
+
+                        //if accessible cell
+                        boolean accessible = (getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].available_getter());
+                        if (emptyDestination && accessible) {
+
+                            for (GameField[] foundMove : foundMoves) {
+                                if (foundMove[0].getX() == getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].getX() &&
+                                        foundMove[0].getY() == getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)].getY()) {
+                                    cont = true;
+                                }
+
+                            }
+                            if(cont)
+                                continue;
+                            foundMoves.add(new GameField[]{start, getTiles()[position_x + (xOffset * 2)][position_y + (yOffset * 2)]});
+                            foundMoves.addAll(findMoves(foundMoves.get(foundMoves.size()-1)[1], foundMoves));
+
+
+                        }
+                        for (int i = 0; i < foundMoves.size(); i++) {
+                            for (int j = i+1; j < foundMoves.size(); j++) {
+                                // compare list.get(i) and list.get(j)
+                                if(foundMoves.get(i)[1].getX()==foundMoves.get(j)[1].getX()&&
+                                        foundMoves.get(i)[1].getY()==foundMoves.get(j)[1].getY()){
+                                    foundMoves.remove(j);
+                                }
+                            }
+                        }
+                    } catch (Exception ignore) { /*nothing here*/}
+                }
+            }
+        }
+
         return foundMoves;
     }
 
